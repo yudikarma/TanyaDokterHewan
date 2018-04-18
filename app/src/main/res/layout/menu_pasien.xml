@@ -7,7 +7,7 @@
     android:background="#fcfcfc">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="220dp" 
+        android:layout_height="220dp"
         android:layout_width="match_parent"
         android:id="@+id/appbar"
         android:theme="@android:style/ThemeOverlay"
