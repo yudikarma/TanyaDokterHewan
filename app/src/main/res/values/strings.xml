@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TanyaDokterHewan</string>
     <string name="register">Create a Acount</string>
+    <string name="display_name">Display_Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

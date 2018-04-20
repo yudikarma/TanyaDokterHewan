@@ -1,99 +1,69 @@
 package com.example.jon_snow.tanyadokterhewan;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ImageView;
 
-import org.w3c.dom.Text;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager slideview;
-    private LinearLayout dotslayout;
 
-    private TextView[] mDotslayout;
-
-    private SliderAdapter sliderAdapter;
-    private TextView txtFinish;
-    private int mCurrentPage;
+    //fIREBASE
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private ImageView imgkeluar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.menu_pasien);
+        //fIREBASE
+        mAuth = FirebaseAuth.getInstance();
 
-        slideview = (ViewPager) findViewById(R.id.slideview);
-        dotslayout = (LinearLayout) findViewById(R.id.dotslayout);
-        txtFinish = (TextView) findViewById(R.id.btnFinish);
-        sliderAdapter = new SliderAdapter(this);
-        slideview.setAdapter(sliderAdapter);
-        addDotsIndikator(0);
-
-        slideview.addOnPageChangeListener(viewListener);
-
-        txtFinish.setOnClickListener(new View.OnClickListener() {
+        imgkeluar = (ImageView) findViewById(R.id.keluar);
+        imgkeluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,menu_pasien.class);
-               startActivity(intent);
 
+                FirebaseAuth.getInstance().signOut();
+                sendTostart();
             }
         });
 
-    }
 
 
-    public void addDotsIndikator(int position){
-        mDotslayout = new TextView[3];
-        dotslayout.removeAllViews();
-        for(int i=0;i<mDotslayout.length;i++){
-            mDotslayout[i] = new TextView(this);
-            mDotslayout[i].setText(Html.fromHtml("&#8226;"));
-            mDotslayout[i].setTextSize(35);
-            mDotslayout[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
 
-            dotslayout.addView(mDotslayout[i]);
 
-        }
-
-        if(mDotslayout.length > 0){
-            mDotslayout[position].setTextColor(getResources().getColor(R.color.colorWhite));
-        }
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+       sendTostart();
+    }
 
-    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    private void sendTostart() {
+        //Check i user is Sign-in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (!(currentUser != null)) {
+            // User is signed in
+            Intent intent = new Intent(MainActivity.this,Flashscreen.class);
+            startActivity(intent);
+            finish();
 
-        }
 
-        @Override
-        public void onPageSelected(int position) {
-            addDotsIndikator(position);
-            mCurrentPage = position;
-            if (position == mDotslayout.length -1){
-                txtFinish.setEnabled(true);
-                txtFinish.setVisibility(View.VISIBLE);
-                txtFinish.setText("Finish");
-            } else{
-                txtFinish.setEnabled(false);
-                txtFinish.setVisibility(View.INVISIBLE);
-                //btnFinish.setText("Finish");
-            }
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
+        } else {
+            // No user is signed in
 
         }
-    };
+
+    }
+
 
 }
