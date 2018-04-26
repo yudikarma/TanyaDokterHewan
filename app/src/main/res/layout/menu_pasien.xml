@@ -22,7 +22,7 @@
             android:background="@drawable/colapsing_bacground"
             app:title="Dokter FKH">
 
-            <android.support.v7.widget.Toolbar
+          <!--  <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:id="@+id/toolbarid"
@@ -31,7 +31,14 @@
 
                 >
 
-            </android.support.v7.widget.Toolbar>
+            </android.support.v7.widget.Toolbar>-->
+            <include
+                android:id="@+id/menu_app_bar"
+                layout="@layout/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
 
 
 

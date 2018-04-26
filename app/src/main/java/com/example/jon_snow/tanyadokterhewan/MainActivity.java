@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_pasien);
-      /*  mtToolbar = (Toolbar) findViewById(R.id.regist_app_bar);
+        mtToolbar = (Toolbar) findViewById(R.id.main_app_bar);
         setSupportActionBar(mtToolbar);
-        getSupportActionBar().setTitle("Registrasi");
-        mAuth = FirebaseAuth.getInstance();*/
+        getSupportActionBar().setTitle("Tanya FKH");
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
 
 
         return true;
