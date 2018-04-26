@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_pasien);
-        mtToolbar = (Toolbar) findViewById(R.id.main_app_bar);
+        mtToolbar = (Toolbar) findViewById(R.id.toolbarid);
         setSupportActionBar(mtToolbar);
-        getSupportActionBar().setTitle("Tanya FKH");
+
+
         mAuth = FirebaseAuth.getInstance();
 
 
