@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,23 +21,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ImageView imgkeluar;
+    private Toolbar mtToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_pasien);
-        //fIREBASE
-        mAuth = FirebaseAuth.getInstance();
+      /*  mtToolbar = (Toolbar) findViewById(R.id.regist_app_bar);
+        setSupportActionBar(mtToolbar);
+        getSupportActionBar().setTitle("Registrasi");
+        mAuth = FirebaseAuth.getInstance();*/
 
-        imgkeluar = (ImageView) findViewById(R.id.keluar);
-        imgkeluar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                FirebaseAuth.getInstance().signOut();
-                sendTostart();
-            }
-        });
 
 
 
@@ -49,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendTostart() {
-        //Check i user is Sign-in
+        //Check i user is Sign-out
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
-            // User is signed in
-            Intent intent = new Intent(MainActivity.this,Flashscreen.class);
+            // !User is signed in
+            Intent intent = new Intent(MainActivity.this,FlashScreen.class);
             startActivity(intent);
             finish();
 
@@ -65,5 +63,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu,menu);
 
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.logout_menu_main){
+            FirebaseAuth.getInstance().signOut();
+            sendTostart();
+        }
+        return true;
+    }
 }

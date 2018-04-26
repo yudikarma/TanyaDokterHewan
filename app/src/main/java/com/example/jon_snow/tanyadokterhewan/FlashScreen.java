@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Flashscreen extends AppCompatActivity {
+public class FlashScreen extends AppCompatActivity {
     private ViewPager slideview;
     private LinearLayout dotslayout;
 
@@ -45,7 +45,7 @@ public class Flashscreen extends AppCompatActivity {
         txtFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Flashscreen.this,RegisterActivity.class);
+                Intent intent = new Intent(FlashScreen.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
 
