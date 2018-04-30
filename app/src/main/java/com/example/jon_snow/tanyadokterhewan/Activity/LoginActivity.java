@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     mpProgressDialog.show();
                     loginUser(email,password);
                 }else {
+                     mpProgressDialog.hide();
                    Toast.makeText(LoginActivity.this,"please insert your email and password login",Toast.LENGTH_SHORT).show();
                 }
 
@@ -111,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                startActivity(intent);
                finish();
            }else{
+               mpProgressDialog.hide();
                Toast.makeText(LoginActivity.this,"Something error !!!",Toast.LENGTH_SHORT).show();
            }
             }

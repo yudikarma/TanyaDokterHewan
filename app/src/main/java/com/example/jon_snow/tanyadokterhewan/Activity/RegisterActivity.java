@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
@@ -18,11 +19,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout displayname;
     private TextInputLayout email;
     private TextInputLayout password;
+    private TextInputLayout no_hp;
+    private TextInputLayout alamat;
+    private RadioGroup mRadioGroup;
+
     private Button register;
     private Toolbar mToolbar;
     private ProgressDialog mpProgressDialog;
@@ -30,6 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    //database firebase
+    private DatabaseReference mDatabaseReference;
+    private  FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Registrasi");
 
+        //Reference
 
         displayname = (TextInputLayout) findViewById(R.id.reg_display_name);
         email = (TextInputLayout) findViewById(R.id.reg_email);
         password = (TextInputLayout) findViewById(R.id.reg_password);
         register = (Button) findViewById(R.id.regist_btn);
+        no_hp = (TextInputLayout) findViewById(R.id.reg_no_hp);
+        alamat = (TextInputLayout) findViewById(R.id.reg_alamat);
+        mRadioGroup = (RadioGroup) findViewById(R.id.reg_JenisLK);
+
 
         mpProgressDialog = new ProgressDialog(this);
 
@@ -54,6 +73,19 @@ public class RegisterActivity extends AppCompatActivity {
                 String edisplayname = displayname.getEditText().getText().toString();
                 String eemail = email.getEditText().getText().toString();
                 String epassword = password.getEditText().getText().toString();
+               /* String eno_hp = no_hp.getEditText().getText().toString();
+                String ealamat = alamat.getEditText().getText().toString();
+                String jenislk = "";
+                int gender_id = mRadioGroup.getCheckedRadioButtonId();
+                if (gender_id==1){
+                    jenislk = "laki-laki";
+
+                }else if (gender_id ==2){
+                    jenislk = "perempuan";
+                }else{
+                    jenislk="kosong";
+                }
+*/
                 if(!TextUtils.isEmpty(edisplayname)||TextUtils.isEmpty(eemail)||TextUtils.isEmpty(epassword)) {
                     mpProgressDialog.setTitle("Creating new acount..");
                     mpProgressDialog.setMessage("Please wait.. while we create your acount..");
@@ -61,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                     mpProgressDialog.show();
                     register_user(edisplayname, eemail, epassword);
                 }else{
+                    mpProgressDialog.hide();
                     Toast.makeText(RegisterActivity.this,"Field Tidak Boleh Kosong",Toast.LENGTH_SHORT).show();
                 }
 
@@ -68,18 +101,52 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register_user(String edisplayname, String eemail, String epassword) {
+    private void register_user(final String edisplayname, final String eemail, String epassword) {
         mAuth.createUserWithEmailAndPassword(eemail,epassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isComplete()){
-                    mpProgressDialog.dismiss();
+                if(task.isSuccessful()){
+
+                    currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = currentUser.getUid();
+
+                    //child first is root child,then second child
+                    mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+                    HashMap<String,String> userMap = new HashMap<>();
+                    userMap.put("name",edisplayname);
+                    userMap.put("status","hi ther i using tanya dokter hewan");
+                    userMap.put("image","default");
+                    userMap.put("thumb_image","default");
+                    userMap.put("email",eemail);
+                    userMap.put("no_hp","082168004756");
+                    userMap.put("address","JL.Paya umet no 3 lung bata");
+                    userMap.put("Jenis_kelamin","laki-laki");
+                    mDatabaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                mpProgressDialog.dismiss();
+                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                mpProgressDialog.hide();
+                                Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+
+                    /*mpProgressDialog.dismiss();
                     Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                    finish();
+                    finish();*/
 
                 }else{
+                    mpProgressDialog.hide();
                     Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();
                 }
             }
