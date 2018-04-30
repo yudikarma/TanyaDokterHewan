@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
             // !User is signed in
-            Intent intent = new Intent(MainActivity.this,FlashScreen.class);
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(intent);
             finish();
 

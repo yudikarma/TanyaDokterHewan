@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.ProgressDialog;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mLoginFormView;
     private TextView regiSt;
     private Button mEmailSignInButton;
+    private ProgressDialog mpProgressDialog;
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -85,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         regiSt = (TextView) findViewById(R.id.tvRegister);
+        mpProgressDialog = new ProgressDialog(this);
+
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
@@ -94,7 +98,25 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
-                loginUser(email,password);
+                if (!TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                    mpProgressDialog.setTitle("login..");
+                    mpProgressDialog.setMessage("we are try connect your acount..");
+                    mpProgressDialog.setCanceledOnTouchOutside(false);
+                    mpProgressDialog.show();
+                    loginUser(email,password);
+                }else {
+                   Toast.makeText(LoginActivity.this,"please insert your email and password login",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        regiSt.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
@@ -107,7 +129,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
            if (task.isSuccessful()){
+
+                mpProgressDialog.dismiss();
                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                startActivity(intent);
                finish();
            }else{
