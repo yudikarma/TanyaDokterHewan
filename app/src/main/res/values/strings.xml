@@ -21,4 +21,11 @@
         completions."
     </string>
     <string name="title_activity_chat">ChatActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_request_fragment">Hello Requests Fragment</string>
+    <string name="hello_fragment_chats">Hello Fragment Chats</string>
+    <string name="hello_friends_fragment">hello Friends Fragment</string>
+    <string name="display_name_setting">Display Name</string>
+    <string name="status_setting">Hi There, I\'m Using tanya dokter hewan</string>
 </resources>

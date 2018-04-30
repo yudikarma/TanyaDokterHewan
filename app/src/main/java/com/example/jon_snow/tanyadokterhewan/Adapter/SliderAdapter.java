@@ -1,4 +1,4 @@
-package com.example.jon_snow.tanyadokterhewan;
+package com.example.jon_snow.tanyadokterhewan.Adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.jon_snow.tanyadokterhewan.R;
 
 /**
  * Created by jon_snow on 4/14/2018.

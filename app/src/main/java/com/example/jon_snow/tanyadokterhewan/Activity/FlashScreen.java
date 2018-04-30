@@ -1,4 +1,4 @@
-package com.example.jon_snow.tanyadokterhewan;
+package com.example.jon_snow.tanyadokterhewan.Activity;
 
 /**
  * Created by jon_snow on 4/20/2018.
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jon_snow.tanyadokterhewan.R;
+import com.example.jon_snow.tanyadokterhewan.Adapter.SliderAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class FlashScreen extends AppCompatActivity {

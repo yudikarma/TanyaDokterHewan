@@ -1,7 +1,9 @@
-package com.example.jon_snow.tanyadokterhewan;
+package com.example.jon_snow.tanyadokterhewan.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.jon_snow.tanyadokterhewan.R;
 
 public class SettingActivity extends AppCompatActivity {
 

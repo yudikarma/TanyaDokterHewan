@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
-    tools:context="com.example.jon_snow.tanyadokterhewan.MainActivity">
+    tools:context="com.example.jon_snow.tanyadokterhewan.Activity.MainActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/slideview"
