@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout no_hp;
     private TextInputLayout alamat;
     private RadioGroup mRadioGroup;
+    private RadioButton mRadioButton_lk,mRadioButton_pr;
 
     private Button register;
     private Toolbar mToolbar;
@@ -63,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
         no_hp = (TextInputLayout) findViewById(R.id.reg_no_hp);
         alamat = (TextInputLayout) findViewById(R.id.reg_alamat);
         mRadioGroup = (RadioGroup) findViewById(R.id.reg_JenisLK);
+        mRadioButton_lk = (RadioButton) findViewById(R.id.perempuan);
+        mRadioButton_pr = (RadioButton) findViewById(R.id.laki);
+
 
 
         mpProgressDialog = new ProgressDialog(this);
@@ -73,25 +78,26 @@ public class RegisterActivity extends AppCompatActivity {
                 String edisplayname = displayname.getEditText().getText().toString();
                 String eemail = email.getEditText().getText().toString();
                 String epassword = password.getEditText().getText().toString();
-               /* String eno_hp = no_hp.getEditText().getText().toString();
+               String eno_hp = no_hp.getEditText().getText().toString();
                 String ealamat = alamat.getEditText().getText().toString();
                 String jenislk = "";
-                int gender_id = mRadioGroup.getCheckedRadioButtonId();
-                if (gender_id==1){
-                    jenislk = "laki-laki";
-
-                }else if (gender_id ==2){
-                    jenislk = "perempuan";
-                }else{
-                    jenislk="kosong";
+                int jenisid = mRadioGroup.getCheckedRadioButtonId();
+                if (jenisid==mRadioButton_lk.getId()){
+                    jenislk = mRadioButton_lk.getText().toString();
+                }else if (jenisid==mRadioButton_pr.getId()){
+                    jenislk = mRadioButton_pr.getText().toString();
+                }else {
+                    jenislk = "bukan apa2";
                 }
-*/
-                if(!TextUtils.isEmpty(edisplayname)||TextUtils.isEmpty(eemail)||TextUtils.isEmpty(epassword)) {
+
+
+                if(!TextUtils.isEmpty(edisplayname)||TextUtils.isEmpty(eemail)||TextUtils.isEmpty(epassword)
+                        || TextUtils.isEmpty(eno_hp)|| TextUtils.isEmpty(ealamat)||TextUtils.isEmpty(jenislk)) {
                     mpProgressDialog.setTitle("Creating new acount..");
                     mpProgressDialog.setMessage("Please wait.. while we create your acount..");
                     mpProgressDialog.setCanceledOnTouchOutside(false);
                     mpProgressDialog.show();
-                    register_user(edisplayname, eemail, epassword);
+                    register_user(edisplayname, eemail, epassword,eno_hp,ealamat,jenislk);
                 }else{
                     mpProgressDialog.hide();
                     Toast.makeText(RegisterActivity.this,"Field Tidak Boleh Kosong",Toast.LENGTH_SHORT).show();
@@ -101,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register_user(final String edisplayname, final String eemail, String epassword) {
+    private void register_user(final String edisplayname, final String eemail, String epassword,final  String eno_hp, final String ealamat, final String jenislk) {
         mAuth.createUserWithEmailAndPassword(eemail,epassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -119,9 +125,9 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("image","default");
                     userMap.put("thumb_image","default");
                     userMap.put("email",eemail);
-                    userMap.put("no_hp","082168004756");
-                    userMap.put("address","JL.Paya umet no 3 lung bata");
-                    userMap.put("Jenis_kelamin","laki-laki");
+                    userMap.put("no_hp",eno_hp);
+                    userMap.put("address",ealamat);
+                    userMap.put("Jenis_kelamin",jenislk);
                     mDatabaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

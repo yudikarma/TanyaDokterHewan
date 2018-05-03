@@ -23,6 +23,7 @@ public class ChatActivity extends AppCompatActivity {
         mtoolbar = (Toolbar) findViewById(R.id.chat_app_bar);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setTitle("Chat Dokter");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Tabs
         mviewpager = (ViewPager) findViewById(R.id.chat_tab_pager);
