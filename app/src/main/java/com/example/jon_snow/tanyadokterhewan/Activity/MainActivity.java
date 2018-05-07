@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.menu_pasien);
         mtToolbar = (Toolbar) findViewById(R.id.toolbarid);
         setSupportActionBar(mtToolbar);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         pindahToChat = (LinearLayout) findViewById(R.id.layout_chat);
         pindahToChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
             // !User is signed in
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this,FlashScreen.class);
             startActivity(intent);
             finish();
 

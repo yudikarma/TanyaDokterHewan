@@ -1,7 +1,10 @@
 package com.example.jon_snow.tanyadokterhewan.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +23,13 @@ public class SettingActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private FirebaseUser mCurrentuser;
 
+    private static final int GALLERY_PICK = 1;
+
     //Android Layout
     private CircleImageView mCircleImageView;
     private TextView mDisplayname;
     private TextView mstatus;
+    private Button btn_changeimage_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,7 @@ public class SettingActivity extends AppCompatActivity {
         mCircleImageView = (CircleImageView) findViewById(R.id.circleImageView);
         mDisplayname = (TextView) findViewById(R.id.display_name_setting);
         mstatus = (TextView) findViewById(R.id.status_setting);
+        btn_changeimage_setting = (Button) findViewById(R.id.change_image_setting);
 
         mCurrentuser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = mCurrentuser.getUid();
@@ -54,6 +61,18 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        //onclik image change
+        btn_changeimage_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galery_intent = new Intent();
+                galery_intent.setType("image/*");
+                galery_intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                startActivityForResult(Intent.createChooser(galery_intent,"Select Image"),GALLERY_PICK);
             }
         });
     }
