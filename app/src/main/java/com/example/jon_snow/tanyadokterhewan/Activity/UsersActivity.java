@@ -19,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class UsersActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
-
+    private String nambahaja;
     private DatabaseReference mDatabaseReference;
 
 
