@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         pindahToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,ChatActivity.class);
+                Intent i = new Intent(MainActivity.this, ChatActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }
@@ -45,17 +45,12 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
-
-
-
-
-
     }
+
     @Override
     public void onStart() {
         super.onStart();
-       sendTostart();
+        sendTostart();
     }
 
     private void sendTostart() {
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
             // !User is signed in
-            Intent intent = new Intent(MainActivity.this,FlashScreen.class);
+            Intent intent = new Intent(MainActivity.this, FlashScreen.class);
             startActivity(intent);
             finish();
 
@@ -78,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
 
         return true;
@@ -88,13 +83,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.logout_menu_main){
+        if (item.getItemId() == R.id.logout_menu_main) {
             FirebaseAuth.getInstance().signOut();
             sendTostart();
-        }else if (item.getItemId()==R.id.acount_setting_main){
-            Intent i = new Intent(MainActivity.this,SettingActivity.class);
+        } else if (item.getItemId() == R.id.acount_setting_main) {
+            Intent i = new Intent(MainActivity.this, SettingActivity.class);
             /*i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
             startActivity(i);
+        } else if (item.getItemId() == R.id.All_user) {
+            Intent i = new Intent(MainActivity.this, UsersActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+
         }
         return true;
     }
