@@ -17,10 +17,9 @@
         android:id="@+id/user_single_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="102dp"
-        android:layout_marginTop="43dp"
+        android:layout_alignStart="@+id/user_singgle_name"
+        android:layout_marginTop="45dp"
         android:text="Status" />
 
     <TextView
@@ -31,7 +30,8 @@
         android:layout_alignTop="@+id/profil_single_layout"
         android:layout_marginStart="90dp"
         android:text="DIsplay_name"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>
