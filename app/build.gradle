@@ -39,7 +39,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:15.0.2'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
-    implementation 'com.squareup.picasso:picasso:2.3.3'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
     implementation 'com.iceteck.silicompressorr:silicompressor:2.1'
     implementation 'id.zelory:compressor:2.0.0'
 

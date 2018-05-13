@@ -1,5 +1,6 @@
 package com.example.jon_snow.tanyadokterhewan.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,15 +36,18 @@ public class UsersActivity extends AppCompatActivity{
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseRecyclerAdapter<Users,UserviewHolder> adapter;
 
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseReference.keepSynced(true);
 
         mToolbar = (Toolbar) findViewById(R.id.user_appbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("ALL User");
+        getSupportActionBar().setTitle("Dokter List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mListView = (RecyclerView) findViewById(R.id.user_list);
@@ -63,9 +69,12 @@ public class UsersActivity extends AppCompatActivity{
                 holder.setstatus(model.getStatus());
                 holder.setMcCircleImageView(model.getThumb_image());
 
+              mProgressDialog.dismiss();
+
+
                 final String user_id = getRef(position).getKey();
 
-                holder.mView.setOnClickListener(new View.OnClickListener() {
+                holder.mView.setOnClickListener(    new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent i = new Intent(UsersActivity.this,ProfilActivity.class);
@@ -97,6 +106,11 @@ public class UsersActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
+        mProgressDialog = new ProgressDialog(UsersActivity.this);
+        mProgressDialog.setTitle("load all user data..");
+        mProgressDialog.setMessage("please wait..");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
 
 
       adapter.startListening();
@@ -134,8 +148,27 @@ public class UsersActivity extends AppCompatActivity{
         public void setstatus(String status){
             mstatus.setText(status);
         }
-        public  void setMcCircleImageView(String img_uri){
-            Picasso.with(UsersActivity.this).load(img_uri).placeholder(R.drawable.user).into(mcCircleImageView);
+        public  void setMcCircleImageView(final String img_uri){
+            //Picasso.with(UsersActivity.this).load(img_uri).placeholder(R.drawable.user).into(mcCircleImageView);
+            if (!img_uri.equals("default")){
+                Picasso.with(UsersActivity.this).load(img_uri).networkPolicy(NetworkPolicy.OFFLINE)
+                        .placeholder(R.drawable.user).into(mcCircleImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(UsersActivity.this).load(img_uri).placeholder(R.drawable.user).into(mcCircleImageView);
+
+                    }
+                });
+
+            }else{
+                Picasso.with(UsersActivity.this).load(R.drawable.user).into(mcCircleImageView);
+
+            }
         }
     }
 

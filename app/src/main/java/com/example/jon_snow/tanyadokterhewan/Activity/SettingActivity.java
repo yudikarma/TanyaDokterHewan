@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -69,19 +71,38 @@ public class SettingActivity extends AppCompatActivity {
         mCurrentuser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = mCurrentuser.getUid();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        mDatabaseReference.keepSynced(true);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String display_name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                final String image = dataSnapshot.child("image").getValue().toString();
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
                 String address = dataSnapshot.child("address").getValue().toString();
                 String no_hp = dataSnapshot.child("no_hp").getValue().toString();
 
                 mDisplayname.setText(display_name);
                 mstatus.setText(status);
-                Picasso.with(SettingActivity.this).load(image).placeholder(R.drawable.user).into(mCircleImageView);
+                if (!image.equals("default")){
+                    Picasso.with(SettingActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.user).into(mCircleImageView, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            Picasso.with(SettingActivity.this).load(image).placeholder(R.drawable.user).into(mCircleImageView);
+
+                        }
+                    });
+
+                }else{
+                    Picasso.with(SettingActivity.this).load(R.drawable.user).into(mCircleImageView);
+
+                }
 
 
 
