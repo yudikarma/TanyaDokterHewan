@@ -15,9 +15,13 @@ import android.widget.Toast;
 
 import com.example.jon_snow.tanyadokterhewan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
  * A login screen that offers login via email/password.
@@ -50,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //Firebase
     private FirebaseAuth mAuth;
+    //firebase user database
+    private DatabaseReference muserDatabaseReference;
 
 
     @Override
@@ -66,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //firebase
+        muserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
         mAuth = FirebaseAuth.getInstance();
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -106,11 +113,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
            if (task.isSuccessful()){
 
-                mpProgressDialog.dismiss();
-               Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-               startActivity(intent);
-               finish();
+               String device_token = FirebaseInstanceId.getInstance().getToken();
+               String current_user_id = mAuth.getCurrentUser().getUid();
+               muserDatabaseReference.child(current_user_id).child("device_token").setValue(device_token).addOnSuccessListener(new OnSuccessListener<Void>() {
+                   @Override
+                   public void onSuccess(Void aVoid) {
+                       mpProgressDialog.dismiss();
+                       Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       startActivity(intent);
+                        finish();
+                   }
+               });
+
+
            }else{
                mpProgressDialog.hide();
                Toast.makeText(LoginActivity.this,"Something error !!!",Toast.LENGTH_SHORT).show();
