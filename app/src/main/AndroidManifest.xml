@@ -34,8 +34,8 @@
             android:name=".Activity.SettingActivity"
             android:parentActivityName=".Activity.MainActivity" />
         <activity
-            android:name=".Activity.ChatActivity"
-            android:parentActivityName=".Activity.MainActivity" />
+            android:name=".Activity.Tampung_chatActivity"
+            android:parentActivityName=".Activity.ChatActivity2" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -43,17 +43,23 @@
             android:name=".Activity.UsersActivity"
             android:parentActivityName=".Activity.MainActivity" />
         <activity android:name=".Activity.ProfilActivity" />
+
         <service android:name=".Service_app.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service android:name=".Service_app.FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".Activity.ChatActivity2"
+            android:label="@string/title_activity_chat2"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".Activity.MainActivity"></activity>
     </application>
 
 </manifest>

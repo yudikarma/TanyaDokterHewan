@@ -13,27 +13,35 @@ import com.example.jon_snow.tanyadokterhewan.Fragment.RequestsFragment;
  */
 
 public class SectionPageAdapter extends FragmentPagerAdapter {
+    //integer to count number of tabs
+
 
     public SectionPageAdapter(FragmentManager fm) {
         super(fm);
+
     }
 
     @Override
     public Fragment getItem(int position) {
 
-        switch (position){
+
+        switch(position) {
             case 0:
                 RequestsFragment requestsFragment = new RequestsFragment();
                 return requestsFragment;
+
             case 1:
-                ChatFragment chatFragment = new ChatFragment();
-                return chatFragment;
+                ChatFragment chatsFragment = new ChatFragment();
+                return  chatsFragment;
+
             case 2:
                 FriendsFragment friendsFragment = new FriendsFragment();
                 return friendsFragment;
-                default:return null;
 
+            default:
+                return  null;
         }
+
 
     }
 

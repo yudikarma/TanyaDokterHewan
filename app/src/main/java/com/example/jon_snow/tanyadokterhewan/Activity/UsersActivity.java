@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 //import android.widget.Toolbar;
 
@@ -37,6 +38,7 @@ public class UsersActivity extends AppCompatActivity{
     private FirebaseRecyclerAdapter<Users,UserviewHolder> adapter;
 
     private ProgressDialog mProgressDialog;
+    private ImageView statusOnline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class UsersActivity extends AppCompatActivity{
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Dokter List");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        statusOnline = (ImageView) findViewById(R.id.user_single_online_icon);
 
         mListView = (RecyclerView) findViewById(R.id.user_list);
         mListView.setHasFixedSize(true);
@@ -68,6 +71,7 @@ public class UsersActivity extends AppCompatActivity{
                 holder.setNama(model.getName());
                 holder.setstatus(model.getStatus());
                 holder.setMcCircleImageView(model.getThumb_image());
+
 
               mProgressDialog.dismiss();
 

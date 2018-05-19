@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import com.example.jon_snow.tanyadokterhewan.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgkeluar;
     private Toolbar mtToolbar;
     private LinearLayout pindahToChat;
+    private DatabaseReference mUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +36,25 @@ public class MainActivity extends AppCompatActivity {
         mtToolbar = (Toolbar) findViewById(R.id.toolbarid);
         setSupportActionBar(mtToolbar);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+
+
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+
+        }
+
         pindahToChat = (LinearLayout) findViewById(R.id.layout_chat);
         pindahToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ChatActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent i = new Intent(MainActivity.this, ChatActivity2.class);
+                //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
+
 
 
     }
@@ -50,23 +62,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        sendTostart();
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser == null){
+
+            sendTostart();
+
+        } else {
+
+            mUserRef.child("online").setValue("true");
+
+        }*/
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (!(currentUser != null)) {
+            // !User is signed in
+           sendTostart();
+
+
+        } else {
+            mUserRef.child("online").setValue("true");
+
+        }
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser != null) {
+
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+        }
     }
 
     private void sendTostart() {
         //Check i user is Sign-out
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (!(currentUser != null)) {
-            // !User is signed in
-            Intent intent = new Intent(MainActivity.this, FlashScreen.class);
-            startActivity(intent);
-            finish();
-
-
-        } else {
-            // No user is signed in
-
-        }
+        Intent startIntent = new Intent(MainActivity.this, FlashScreen.class);
+        startActivity(startIntent);
+        finish();
 
     }
 
@@ -84,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.logout_menu_main) {
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
             FirebaseAuth.getInstance().signOut();
             sendTostart();
         } else if (item.getItemId() == R.id.acount_setting_main) {
@@ -92,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         } else if (item.getItemId() == R.id.All_user) {
             Intent i = new Intent(MainActivity.this, UsersActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+           // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
 
         }
