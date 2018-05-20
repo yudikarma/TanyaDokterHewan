@@ -16,7 +16,7 @@ import android.widget.TextView;
 //import android.widget.Toolbar;
 
 import com.example.jon_snow.tanyadokterhewan.R;
-import com.example.jon_snow.tanyadokterhewan.Adapter.Users;
+import com.example.jon_snow.tanyadokterhewan.Model.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;

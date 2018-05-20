@@ -1,4 +1,4 @@
-package com.example.jon_snow.tanyadokterhewan.Adapter;
+package com.example.jon_snow.tanyadokterhewan.Model;
 public class Friends {
 
     public String date;

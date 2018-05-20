@@ -19,9 +19,7 @@ import android.widget.TextView;
 
 import com.example.jon_snow.tanyadokterhewan.Activity.ProfilActivity;
 import com.example.jon_snow.tanyadokterhewan.Activity.Tampung_chatActivity;
-import com.example.jon_snow.tanyadokterhewan.Activity.UsersActivity;
-import com.example.jon_snow.tanyadokterhewan.Adapter.Friends;
-import com.example.jon_snow.tanyadokterhewan.Adapter.Users;
+import com.example.jon_snow.tanyadokterhewan.Model.Friends;
 import com.example.jon_snow.tanyadokterhewan.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

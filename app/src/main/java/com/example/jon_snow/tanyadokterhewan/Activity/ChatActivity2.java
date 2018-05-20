@@ -122,15 +122,15 @@ public class ChatActivity2 extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
-                case 0:
+              /*  case 0:
                     RequestsFragment requestsFragment = new RequestsFragment();
-                    return requestsFragment;
+                    return requestsFragment;*/
 
-                case 1:
+                case 0:
                     ChatFragment chatsFragment = new ChatFragment();
                     return  chatsFragment;
 
-                case 2:
+                case 1:
                     FriendsFragment friendsFragment = new FriendsFragment();
                     return friendsFragment;
 
@@ -143,18 +143,18 @@ public class ChatActivity2 extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position){
+                /*case 0:
+                    return "REQUEST";*/
                 case 0:
-                    return "REQUEST";
-                case 1:
                     return "CHATS";
-                case 2:
+                case 1:
                     return "Friends";
                 default:
                     return null;

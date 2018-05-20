@@ -1,4 +1,4 @@
-package com.example.jon_snow.tanyadokterhewan.Adapter;
+package com.example.jon_snow.tanyadokterhewan.Model;
 
 public class Users {
     private String name;
@@ -9,15 +9,9 @@ public class Users {
     private String no_hp;
     private String address;
     private String Jenis_kelamin;
-    private Boolean online;
 
-    public Boolean getOnline() {
-        return online;
-    }
 
-    public void setOnline(Boolean online) {
-        this.online = online;
-    }
+
 
     public String getDevice_token() {
         return device_token;
