@@ -31,6 +31,7 @@ import com.example.jon_snow.tanyadokterhewan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,9 @@ public class Tampung_chatActivity extends AppCompatActivity {
     private TextView mTitleView;
     private TextView mLastView;
     private CircleImageView mProfilImage;
+   // private DatabaseReference firebaseUser;
+    private DatabaseReference mUserRef;
+
 
     private RecyclerView mMessagesList;
     private FirebaseAuth mAuth;
@@ -124,6 +128,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
 
         mRootDatabaseReference = FirebaseDatabase.getInstance().getReference();
+       // firebaseUser = FirebaseDatabase.getInstance().getReference().child("User");
         mAuth = FirebaseAuth.getInstance();
         mCurrentUserId = mAuth.getCurrentUser().getUid();
 
@@ -136,6 +141,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
        mMessagesList.setHasFixedSize(true);
        mMessagesList.setLayoutManager(mLinearLayout);
        mMessagesList.setAdapter(mAdapter);
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
 
        /*===========Adapter FOR TAMPILIN PESAN ============*/
@@ -220,7 +226,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                sendMessage();
-               loadMessages();
+              // loadMessages();
            }
        });
 
@@ -245,7 +251,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
                 itemPos = 0;
 
-              //  loadMoreMessages();
+                loadMoreMessages();
 
 
             }
@@ -266,6 +272,33 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (!(currentUser != null)) {
+            // !User is signed in
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+        } else {
+            mUserRef.child("online").setValue("true");
+
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser != null) {
+
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+        }
     }
 
     @Override
@@ -505,7 +538,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
                     if (databaseError != null){
                         Log.d("CHAT_LOG", databaseError.getMessage().toString());
                     }
-                    loadMessages();
+                   // loadMessages();
                 }
             });
         }

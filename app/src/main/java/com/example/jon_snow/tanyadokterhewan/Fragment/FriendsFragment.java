@@ -24,11 +24,13 @@ import com.example.jon_snow.tanyadokterhewan.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
@@ -50,6 +52,7 @@ public class FriendsFragment extends Fragment {
 
     private String mCurrent_user_id;
     private ProgressDialog mProgressDialog;
+    private DatabaseReference mUserRef;
 
     //private View mMainView;
 
@@ -71,7 +74,7 @@ public class FriendsFragment extends Fragment {
         statusOnline = (ImageView) rootView.findViewById(R.id.user_single_online_icon);
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
-
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -184,6 +187,15 @@ public class FriendsFragment extends Fragment {
 */
 
         adapter.startListening();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (!(currentUser != null)) {
+            // !User is signed in
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+        } else {
+            mUserRef.child("online").setValue("true");
+
+        }
 
     }
 
@@ -191,6 +203,15 @@ public class FriendsFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser != null) {
+
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+        }
     }
 
     public class FriendsViewHolder extends RecyclerView.ViewHolder {
