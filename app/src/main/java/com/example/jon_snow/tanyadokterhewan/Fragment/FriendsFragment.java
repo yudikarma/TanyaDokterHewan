@@ -188,18 +188,18 @@ public class FriendsFragment extends Fragment {
 
         adapter.startListening();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (!(currentUser != null)) {
+        /*if (!(currentUser != null)) {
             // !User is signed in
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
-        } else {
+        } else {*/
             mUserRef.child("online").setValue("true");
-
-        }
+/*
+        }*/
 
     }
 
-    @Override
+   /* @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
@@ -212,6 +212,12 @@ public class FriendsFragment extends Fragment {
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
         }
+    }*/
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
     }
 
     public class FriendsViewHolder extends RecyclerView.ViewHolder {

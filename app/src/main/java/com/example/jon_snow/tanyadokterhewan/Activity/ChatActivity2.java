@@ -96,16 +96,16 @@ public class ChatActivity2 extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
             // !User is signed in
             sendTostart();
 
 
-        } else {
+        } else {*/
             mUserRef.child("online").setValue("true");
-
-        }
+/*
+        }*/
 
     }
 

@@ -101,8 +101,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="Konsultasikan penyakit yang diderita hewan peliharaan anda."
                         android:textColor="@color/birutua" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -130,7 +129,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Konsultasi"
+                        android:text="Daftar Berobat"
                         android:textStyle="bold" />
 
                     <View
@@ -144,8 +143,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="Silahkan Klik untuk daftar berobat pada klinik FKH."
                         android:textColor="@color/birutua" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -184,7 +182,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="Konsultasi"/>
+                        android:text="Baca Artikel"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -194,8 +192,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="membaca artikel tentang menjaga kesehatan hewan."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>
@@ -224,7 +221,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="Konsultasi"/>
+                        android:text="Acount Settings"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -271,7 +268,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Konsultasi"/>
+                        android:text="Tentang"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -281,8 +278,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="Informasi tentang Cara penggunaan Aplikasi dan Informasi Developer."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>
@@ -312,7 +308,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Konsultasi"/>
+                        android:text="Keluar"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -322,8 +318,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="Keluar dari aplikasi dan user login."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>

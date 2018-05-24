@@ -183,31 +183,38 @@ public class ChatFragment extends Fragment {
         super.onStart();
         adapter.startListening();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+       /* FirebaseUser currentUser = mAuth.getCurrentUser();
         if (!(currentUser != null)) {
             // !User is signed in
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
-        } else {
+        } else {*/
             mUserRef.child("online").setValue("true");
-
-        }
+/*
+        }*/
     }
 
 
-
+/*
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+      *//*  FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null) {
 
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
-        }
+
+        }*//*
+
+    }*/
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
     }
 
     public static class ConvViewHolder extends RecyclerView.ViewHolder {
