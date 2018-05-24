@@ -7,23 +7,21 @@
     tools:context=".Activity.Tampung_chatActivity">
 
 
-
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/message_swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="520dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/messages_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="520dp"
             android:layout_above="@+id/linearLayout"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/tampungchat_app_bar"
-            ></android.support.v7.widget.RecyclerView>
+            android:layout_below="@+id/tampungchat_app_bar"></android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
