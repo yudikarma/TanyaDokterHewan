@@ -1,5 +1,6 @@
 package com.example.jon_snow.tanyadokterhewan.Adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jon_snow.tanyadokterhewan.Model.GetTimeAgo;
 import com.example.jon_snow.tanyadokterhewan.Model.Messages;
 import com.example.jon_snow.tanyadokterhewan.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +24,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
@@ -64,6 +68,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         Messages c = mMessagesList.get(position);
         String from_user = c.getFrom();
+        Long time = c.getTime();
         String Message_type = c.getType();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(from_user);
         mUserDatabase.addValueEventListener(new ValueEventListener() {
@@ -86,6 +91,15 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if (Message_type.equals("text")){
             holder.messageText.setText(c.getMessage());
             holder.messageImage.setVisibility(View.INVISIBLE);
+
+            GetTimeAgo getTimeAgo = new GetTimeAgo();
+
+
+
+            @SuppressLint("RestrictedApi") String lastSeenTime = getTimeAgo.getTimeAgo(time, getApplicationContext());
+
+           // mLastView.setText(lastSeenTime);
+            holder.time_text_layout.setText(lastSeenTime);
         }else{
             holder.messageText.setVisibility(View.INVISIBLE);
             Picasso.with(holder.profileImage.getContext()).load(c.getMessage())

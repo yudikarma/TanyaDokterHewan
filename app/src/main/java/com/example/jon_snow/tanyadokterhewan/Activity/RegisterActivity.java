@@ -121,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     HashMap<String,String> userMap = new HashMap<>();
                     userMap.put("name",edisplayname);
-                    userMap.put("status","hi ther i using tanya dokter hewan");
+                    userMap.put("status","Hi saya pengguna aplikasi Tanya dokter Hewan");
                     userMap.put("image","default");
                     userMap.put("thumb_image","default");
                     userMap.put("email",eemail);

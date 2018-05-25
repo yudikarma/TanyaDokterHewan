@@ -67,7 +67,7 @@ public class ProfilActivity extends AppCompatActivity {
         mCurrentState = "not_friend";
 
         //inisialisasi firebase
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);   //firebase database user
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Dokters").child(userid);   //firebase database user => change to Dokters
         mRequestDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friend_request");  //firebase database reqfriend
         mFriendsDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friends");             //inisial database for friend
         mNotificationDatabaseReference = FirebaseDatabase.getInstance().getReference().child("notifications"); //firebase database inisial for notification
@@ -105,7 +105,7 @@ public class ProfilActivity extends AppCompatActivity {
                 //Display Information
                 profil_displayname.setText(display_name);
                 profil_status.setText(status);
-                Picasso.with(ProfilActivity.this).load(image).placeholder(R.drawable.colapsing_bacground).into(profil_image);
+                Picasso.with(ProfilActivity.this).load(image).placeholder(R.drawable.default_avatar).into(profil_image);
 
                 // ==================== FRIEND LIST / Request Feature =====//
 
@@ -245,8 +245,8 @@ public class ProfilActivity extends AppCompatActivity {
                     friendsMap.put("Friends/"+mFirebaseUser.getUid()+"/"+userid+"/date",currentDate);
                     friendsMap.put("Friends/"+userid+"/"+mFirebaseUser.getUid()+"/date", currentDate);
 
-                    friendsMap.put("Friend_req/"+mFirebaseUser.getUid()+"/"+userid,null );
-                    friendsMap.put("Friend_req/"+userid+"/"+mFirebaseUser.getUid(), null);
+                    friendsMap.put("Friend_request/"+mFirebaseUser.getUid()+"/"+userid,null );
+                    friendsMap.put("Friend_request/"+userid+"/"+mFirebaseUser.getUid(), null);
 
                   mRootDatabaseReference.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
                       @Override

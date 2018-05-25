@@ -44,7 +44,7 @@ public class UsersActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Dokters");
         mDatabaseReference.keepSynced(true);
 
         mToolbar = (Toolbar) findViewById(R.id.user_appbar);
@@ -56,7 +56,7 @@ public class UsersActivity extends AppCompatActivity{
         mListView = (RecyclerView) findViewById(R.id.user_list);
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(this));
-        Query query = FirebaseDatabase.getInstance().getReference().child("Users").limitToLast(50);
+        Query query = FirebaseDatabase.getInstance().getReference().child("Dokters").limitToLast(50);
 
 
         FirebaseRecyclerOptions<Users> options =

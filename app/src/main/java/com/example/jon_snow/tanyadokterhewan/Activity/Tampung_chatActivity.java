@@ -75,6 +75,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
     private LinearLayoutManager  mLinearLayout;
     private MessageAdapter mAdapter;
     private EditText mChatMessageView;
+    private TextView time_text_layout;
     private SwipeRefreshLayout mRefreshLayout;
 
     private static final int TOTAL_ITEMS_TO_LOAD = 10;
@@ -123,6 +124,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
         mChatMessageView = (EditText) findViewById(R.id.chat_message_view);
         mChatSendBtn = (ImageButton) findViewById(R.id.chat_send_btn);
         mChatAddBtn = (ImageButton) findViewById(R.id.chat_add_btn);
+        time_text_layout = findViewById(R.id.time_text_layout);
 
         /* =======================Inisialisasi Layout =============*/
 
@@ -158,11 +160,12 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
 
       /*  ====== MENDAPATKAN INFORMASI DARI DATAABASE TENTANG USER YANG DI chAT ====*/
-       mRootDatabaseReference.child("Users").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
+       mRootDatabaseReference.child("Dokters").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {
                String online = dataSnapshot.child("online").getValue().toString();
                String image = dataSnapshot.child("image").getValue().toString();
+
 
                setMcCircleImageView(image);
 
@@ -187,6 +190,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
            }
        });
+
 
 
 
@@ -442,6 +446,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
                 messagesList.add(message);
                 mAdapter.notifyDataSetChanged();
+               // setTime_text_layout(Long.parseLong(message.getMessage()));
 
                 mMessagesList.scrollToPosition(messagesList.size() - 1);
 
@@ -469,6 +474,9 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
             }
         });
+
+
+
 
 
        /* mRootDatabaseReference.child(mCurrentUserId).child(mChatuser).addChildEventListener(new ChildEventListener() {
@@ -566,6 +574,9 @@ public class Tampung_chatActivity extends AppCompatActivity {
             Picasso.with(Tampung_chatActivity.this).load(R.drawable.default_avatar).into(mProfilImage);
 
         }
+    }
+    public void setTime_text_layout(final long timesend){
+        time_text_layout.setText(String.valueOf(timesend));
     }
 
 }
