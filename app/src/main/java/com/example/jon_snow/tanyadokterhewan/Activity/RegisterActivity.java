@@ -128,6 +128,8 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("no_hp",eno_hp);
                     userMap.put("address",ealamat);
                     userMap.put("Jenis_kelamin",jenislk);
+                    userMap.put("uid",mAuth.getUid() );
+                    userMap.put("role", "U");
                     mDatabaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

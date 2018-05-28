@@ -19,12 +19,19 @@ import com.example.jon_snow.tanyadokterhewan.R;
 import com.example.jon_snow.tanyadokterhewan.Model.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,19 +40,28 @@ public class UsersActivity extends AppCompatActivity{
     private RecyclerView mListView;
     private String nambahaja;
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference userDatabase;
     //private FirebaseListAdapter adapter;
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseRecyclerAdapter<Users,UserviewHolder> adapter;
 
     private ProgressDialog mProgressDialog;
     private ImageView statusOnline;
+    private Users users1;
+    private String muser;
+    private  Query query;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Dokters");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("users");
         mDatabaseReference.keepSynced(true);
+        muser = FirebaseAuth.getInstance().getUid();
+
 
         mToolbar = (Toolbar) findViewById(R.id.user_appbar);
         setSupportActionBar(mToolbar);
@@ -56,7 +72,29 @@ public class UsersActivity extends AppCompatActivity{
         mListView = (RecyclerView) findViewById(R.id.user_list);
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(this));
-        Query query = FirebaseDatabase.getInstance().getReference().child("Dokters").limitToLast(50);
+
+      /*  userDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    users1 = dataSnapshot1.getValue(Users.class);
+                    if (!users1.getRole().equals("U") && users1.getUid().equals(muser)){
+
+                         query = FirebaseDatabase.getInstance().getReference().child("Users").limitToLast(50);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+       Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(muser).child("role").startAt("U").limitToLast(50);
+
+
 
 
         FirebaseRecyclerOptions<Users> options =
@@ -68,12 +106,14 @@ public class UsersActivity extends AppCompatActivity{
         adapter = new FirebaseRecyclerAdapter<Users, UserviewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull UserviewHolder holder, int position, @NonNull Users model) {
+
+
                 holder.setNama(model.getName());
                 holder.setstatus(model.getStatus());
                 holder.setMcCircleImageView(model.getThumb_image());
 
 
-              mProgressDialog.dismiss();
+              /*mProgressDialog.dismiss();*/
 
 
                 final String user_id = getRef(position).getKey();
@@ -110,11 +150,11 @@ public class UsersActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        mProgressDialog = new ProgressDialog(UsersActivity.this);
+       /* mProgressDialog = new ProgressDialog(UsersActivity.this);
         mProgressDialog.setTitle("load all user data..");
         mProgressDialog.setMessage("please wait..");
         mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.show();
+        mProgressDialog.show();*/
 
 
       adapter.startListening();

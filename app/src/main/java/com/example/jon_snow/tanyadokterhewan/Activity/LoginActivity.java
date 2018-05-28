@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView regiSt;
     private Button mEmailSignInButton;
     private ProgressDialog mpProgressDialog;
+    private static String ROLE = "users";
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -115,12 +116,15 @@ public class LoginActivity extends AppCompatActivity {
 
                String device_token = FirebaseInstanceId.getInstance().getToken();
                String current_user_id = mAuth.getCurrentUser().getUid();
+
                muserDatabaseReference.child(current_user_id).child("device_token").setValue(device_token).addOnSuccessListener(new OnSuccessListener<Void>() {
                    @Override
                    public void onSuccess(Void aVoid) {
                        mpProgressDialog.dismiss();
+
                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       intent.putExtra("role", ROLE);
                        startActivity(intent);
                         finish();
                    }

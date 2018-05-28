@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.jon_snow.tanyadokterhewan.Model.GetTimeAgo;
 import com.example.jon_snow.tanyadokterhewan.Model.Messages;
+import com.example.jon_snow.tanyadokterhewan.Model.Users;
 import com.example.jon_snow.tanyadokterhewan.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private List<Messages> mMessagesList;
     private FirebaseAuth mAuth;
     private DatabaseReference mUserDatabase;
+    private String role;
+
 
     public MessageAdapter(List<Messages> mMessagesList) {
         this.mMessagesList = mMessagesList;
@@ -62,8 +65,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MessageViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull final MessageViewHolder holder, final int position) {
 
 
         Messages c = mMessagesList.get(position);
@@ -98,35 +100,59 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             @SuppressLint("RestrictedApi") String lastSeenTime = getTimeAgo.getTimeAgo(time, getApplicationContext());
 
-           // mLastView.setText(lastSeenTime);
+            // mLastView.setText(lastSeenTime);
             holder.time_text_layout.setText(lastSeenTime);
         }else{
             holder.messageText.setVisibility(View.INVISIBLE);
             Picasso.with(holder.profileImage.getContext()).load(c.getMessage())
                     .placeholder(R.drawable.default_avatar).into(holder.messageImage);
         }
+/*
 
-       /* if (from_user.equals(CurrentUserid)){
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Dokters").child(from_user);
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("name").getValue().toString();
+                String image = dataSnapshot.child("thumb_image").getValue().toString();
 
-            holder.messageText.setBackgroundColor(Color.WHITE);
-            holder.messageText.setTextColor(Color.BLACK);
+                holder.displayName.setText(name);
+                Picasso.with(holder.profileImage.getContext()).load(image)
+                        .placeholder(R.drawable.default_avatar).into(holder.profileImage);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if (Message_type.equals("text")){
+            holder.messageText.setText(c.getMessage());
+            holder.messageImage.setVisibility(View.INVISIBLE);
+
+            GetTimeAgo getTimeAgo = new GetTimeAgo();
+
+
+
+            @SuppressLint("RestrictedApi") String lastSeenTime = getTimeAgo.getTimeAgo(time, getApplicationContext());
+
+            // mLastView.setText(lastSeenTime);
+            holder.time_text_layout.setText(lastSeenTime);
         }else{
-            holder.messageText.setBackgroundResource(R.color.colorPrimary);
-            holder.messageText.setTextColor(Color.WHITE);
+            holder.messageText.setVisibility(View.INVISIBLE);
+            Picasso.with(holder.profileImage.getContext()).load(c.getMessage())
+                    .placeholder(R.drawable.default_avatar).into(holder.messageImage);
+        }
+*/
+
+
+    }
+
+            @Override
+            public int getItemCount() {
+                return mMessagesList.size();
+            }
+
 
         }
-        holder.messageText.setText(c.getMessage());
-        holder.time_text_layout.setText((int) c.getTime());*/
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mMessagesList.size();
-    }
-
-
-
-
-
-}

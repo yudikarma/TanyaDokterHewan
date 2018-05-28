@@ -160,7 +160,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
 
       /*  ====== MENDAPATKAN INFORMASI DARI DATAABASE TENTANG USER YANG DI chAT ====*/
-       mRootDatabaseReference.child("Dokters").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
+       mRootDatabaseReference.child("Users").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {
                String online = dataSnapshot.child("online").getValue().toString();

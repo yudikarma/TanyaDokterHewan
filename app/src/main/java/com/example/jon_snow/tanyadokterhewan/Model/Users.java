@@ -9,9 +9,25 @@ public class Users {
     private String no_hp;
     private String address;
     private String Jenis_kelamin;
+    private String device_token;
+    private String role;
+    private String uid;
 
+    public String getUid() {
+        return uid;
+    }
 
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getDevice_token() {
         return device_token;
@@ -21,7 +37,7 @@ public class Users {
         this.device_token = device_token;
     }
 
-    private String device_token;
+
     public Users(){
 
     }
