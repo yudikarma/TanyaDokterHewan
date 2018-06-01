@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //database firebase
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference databaseUserCampur;
     private  FirebaseUser currentUser;
 
     @Override
@@ -117,7 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
                     String uid = currentUser.getUid();
 
                     //child first is root child,then second child
-                    mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                    mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(uid);
+                    databaseUserCampur = FirebaseDatabase.getInstance().getReference().child("UserCampur").child(uid);
+
 
                     HashMap<String,String> userMap = new HashMap<>();
                     userMap.put("name",edisplayname);
@@ -130,15 +133,31 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("Jenis_kelamin",jenislk);
                     userMap.put("uid",mAuth.getUid() );
                     userMap.put("role", "U");
+
+                    final HashMap<String,String> userCampurMap = new HashMap<>();
+                    userCampurMap.put("name", edisplayname);
+                    userCampurMap.put("image", "default");
+                    userCampurMap.put("thumb_image", "default");
+
                     mDatabaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                mpProgressDialog.dismiss();
-                                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
+                              databaseUserCampur.setValue(userCampurMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                  @Override
+                                  public void onComplete(@NonNull Task<Void> task) {
+                                      if (task.isSuccessful()){
+                                          mpProgressDialog.dismiss();
+                                          Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                          startActivity(intent);
+                                          finish();
+                                      }else{
+                                          mpProgressDialog.hide();
+                                          Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();
+                                      }
+                                  }
+                              });
                             } else {
                                 mpProgressDialog.hide();
                                 Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();

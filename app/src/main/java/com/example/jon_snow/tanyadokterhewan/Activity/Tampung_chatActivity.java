@@ -143,7 +143,7 @@ public class Tampung_chatActivity extends AppCompatActivity {
        mMessagesList.setHasFixedSize(true);
        mMessagesList.setLayoutManager(mLinearLayout);
        mMessagesList.setAdapter(mAdapter);
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(mAuth.getCurrentUser().getUid());
 
 
        /*===========Adapter FOR TAMPILIN PESAN ============*/
@@ -160,14 +160,14 @@ public class Tampung_chatActivity extends AppCompatActivity {
 
 
       /*  ====== MENDAPATKAN INFORMASI DARI DATAABASE TENTANG USER YANG DI chAT ====*/
-       mRootDatabaseReference.child("Users").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
+       mRootDatabaseReference.child("Users").child("Dokters").child(mChatuser).addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {
                String online = dataSnapshot.child("online").getValue().toString();
                String image = dataSnapshot.child("image").getValue().toString();
 
 
-               setMcCircleImageView(image);
+               /*setMcCircleImageView(image);*/
 
                if (online.equals("true")){
                    mLastView.setText("Online");

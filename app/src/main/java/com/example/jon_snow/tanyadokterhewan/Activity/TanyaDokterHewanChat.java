@@ -32,7 +32,7 @@ public class TanyaDokterHewanChat extends Application {
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null){
-            mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(mAuth.getCurrentUser().getUid());
             mUserDatabaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

@@ -40,6 +40,7 @@ import id.zelory.compressor.Compressor;
 
 public class SettingActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference mUsercampurDatabase;
     private FirebaseUser mCurrentuser;
 
     private static final int GALLERY_PICK = 1;
@@ -70,7 +71,8 @@ public class SettingActivity extends AppCompatActivity {
 
         mCurrentuser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = mCurrentuser.getUid();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(uid);
+        mUsercampurDatabase = FirebaseDatabase.getInstance().getReference().child("UserCampur").child(uid);
         mDatabaseReference.keepSynced(true);
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -183,13 +185,32 @@ public class SettingActivity extends AppCompatActivity {
                                         Map update_hasmap = new HashMap();
                                         update_hasmap.put("image",downloadUri);
                                         update_hasmap.put("thumb_image",doanload_thumb_uri);
+
+                                        final Map updateHasMapUserCampur = new HashMap();
+                                        updateHasMapUserCampur.put("image", downloadUri);
+                                        updateHasMapUserCampur.put("thumb_image", doanload_thumb_uri);
+
                                         mDatabaseReference.updateChildren(update_hasmap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
+                                            public void onComplete(@NonNull final Task<Void> task) {
                                                 if (task.isSuccessful()){
-                                                    mProgressDialog.dismiss();
-                                                    Toast.makeText(SettingActivity.this,"Succes Upload",Toast.LENGTH_LONG).show();
+                                                   mUsercampurDatabase.updateChildren(updateHasMapUserCampur, new DatabaseReference.CompletionListener() {
+                                                       @Override
+                                                       public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                                           if (task.isSuccessful()){
+                                                               mProgressDialog.dismiss();
+                                                               Toast.makeText(SettingActivity.this,"Succes Upload",Toast.LENGTH_LONG).show();
+                                                           }else
+                                                           {
+                                                               mProgressDialog.dismiss();
+                                                               Toast.makeText(SettingActivity.this," Upload Error",Toast.LENGTH_LONG).show();
+                                                           }
+                                                       }
+                                                   });
 
+                                                }else{
+                                                    mProgressDialog.dismiss();
+                                                    Toast.makeText(SettingActivity.this," Upload Error",Toast.LENGTH_LONG).show();
                                                 }
                                             }
                                         });

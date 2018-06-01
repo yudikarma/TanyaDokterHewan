@@ -72,10 +72,10 @@ public class ChatFragment extends Fragment {
 
         mConvDatabase = FirebaseDatabase.getInstance().getReference().child("Chat").child(mCurrent_user_id);
         mConvDatabase.keepSynced(true);
-        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users"); //=> change from Users
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Dokters"); //=> change from Users
         mMessageDatabase = FirebaseDatabase.getInstance().getReference().child("messages").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()); //=> user yang login
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(mAuth.getCurrentUser().getUid()); //=> user yang login
 
         mConvList.setHasFixedSize(true);
         mConvList.setLayoutManager(new LinearLayoutManager(getContext()));

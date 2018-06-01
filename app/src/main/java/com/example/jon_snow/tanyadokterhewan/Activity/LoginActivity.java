@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //firebase
-        muserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        muserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien");
         mAuth = FirebaseAuth.getInstance();
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {

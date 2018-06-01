@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.ChatActivity2"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity
             android:name=".Activity.RegisterActivity"
             android:parentActivityName=".Activity.LoginActivity" />
         <activity android:name=".Activity.FlashScreen" />
@@ -55,10 +58,7 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".Activity.ChatActivity2"
-            android:label="@string/title_activity_chat2"
-            android:theme="@style/AppTheme"
+        <activity android:name=".Activity.DaftarBerobat"
             android:parentActivityName=".Activity.MainActivity"></activity>
     </application>
 

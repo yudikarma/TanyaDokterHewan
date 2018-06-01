@@ -74,10 +74,10 @@ public class FriendsFragment extends Fragment {
         statusOnline = (ImageView) rootView.findViewById(R.id.user_single_online_icon);
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(mAuth.getCurrentUser().getUid());
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
-        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("Dokters");
         mUsersDatabase.keepSynced(true);
 
         mFriendsList.setHasFixedSize(true);

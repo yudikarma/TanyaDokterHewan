@@ -92,8 +92,7 @@ public class UsersActivity extends AppCompatActivity{
             }
         });*/
 
-       Query query = FirebaseDatabase.getInstance().getReference().child("Users").child(muser).child("role").startAt("U").limitToLast(50);
-
+        Query query = FirebaseDatabase.getInstance().getReference().child("Users").child("Dokters").limitToLast(50);
 
 
 

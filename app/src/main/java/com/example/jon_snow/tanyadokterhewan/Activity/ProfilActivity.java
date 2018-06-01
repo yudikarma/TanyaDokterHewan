@@ -67,7 +67,7 @@ public class ProfilActivity extends AppCompatActivity {
         mCurrentState = "not_friend";
 
         //inisialisasi firebase
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userid);   //firebase database user => change to Dokters
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Dokters").child(userid);   //firebase database user => change to Dokters
         mRequestDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friend_request");  //firebase database reqfriend
         mFriendsDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friends");             //inisial database for friend
         mNotificationDatabaseReference = FirebaseDatabase.getInstance().getReference().child("notifications"); //firebase database inisial for notification

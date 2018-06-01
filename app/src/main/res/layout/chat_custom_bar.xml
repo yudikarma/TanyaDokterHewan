@@ -10,7 +10,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="10dp"
-        android:src="@drawable/default_avatar" />
+        />
 
     <TextView
         android:id="@+id/custom_bar_title"

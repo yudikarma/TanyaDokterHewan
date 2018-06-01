@@ -78,7 +78,7 @@ public class ChatActivity2 extends AppCompatActivity {
         if (mAuth.getCurrentUser() != null) {
 
 
-            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").child(mAuth.getCurrentUser().getUid());
 
         }
 
