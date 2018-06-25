@@ -45,6 +45,7 @@
         <activity
             android:name=".Activity.UsersActivity"
             android:parentActivityName=".Activity.MainActivity" />
+        <activity android:name=".Activity.ListDaftarBerobat" />
         <activity android:name=".Activity.ProfilActivity" />
 
         <service android:name=".Service_app.MyFirebaseMessagingService">
@@ -58,8 +59,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activity.DaftarBerobat"
-            android:parentActivityName=".Activity.MainActivity"></activity>
+        <activity
+            android:name=".Activity.DaftarBerobat"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity android:name=".Activity.DetailHewan"></activity>
     </application>
 
 </manifest>

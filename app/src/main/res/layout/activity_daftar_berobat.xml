@@ -1,9 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DaftarBerobat">
+    android:background="#fcfcfc"
 
-</android.support.constraint.ConstraintLayout>
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:weightSum="1">
+
+        <android.support.design.widget.CollapsingToolbarLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_appbar"
+            app:collapsedTitleGravity="start"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="10dp"
+            app:expandedTitleMarginStart="10dp"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            app:title="Daftar Berobat"
+
+
+            >
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarid"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="parallax"
+
+                app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar">
+
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+
+            <!-- Login progress -->
+            <ProgressBar
+                android:id="@+id/login_progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone" />
+
+            <ScrollView
+                android:id="@+id/login_form"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/email_login_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"></View>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:padding="2dp"
+                        android:text="Informasi Hewan Peliharaan"
+
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/enama_hewan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Name Hewan"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/ejenis_hewan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Jenis Hewan (Ex: kucing,Kelinci)"
+                            android:imeActionId="6"
+                            android:imeActionLabel="@string/action_sign_in_short"
+                            android:imeOptions="actionUnspecified"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/eras"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="RAS (Ex: Angora)"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/ettl"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Tempat Tgl lahir"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/eumur"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Umur"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/ealamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Alamat"
+                            android:inputType="text"
+
+                            android:maxLines="5"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark"
+                            tools:ignore="DuplicateIds" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <RadioGroup
+                        android:id="@+id/ejenis_lk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jenis Kelamin"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/rjantan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="52dp"
+                            android:text="Jantan"
+                            app:layout_constraintStart_toEndOf="@+id/textView"
+                            app:layout_constraintTop_toBottomOf="@+id/reg_password" />
+
+                        <RadioButton
+                            android:id="@+id/rbetina"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="52dp"
+                            android:text="Betina"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.339"
+                            app:layout_constraintStart_toEndOf="@+id/laki"
+                            app:layout_constraintTop_toBottomOf="@+id/reg_password" />
+                    </RadioGroup>
+
+
+                    <Button
+                        android:id="@+id/eDaftarBerobat"
+                        style="?android:textAppearanceSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/green"
+                        android:text="Tambahan Data"
+                        android:textColor="@color/colorWhite"
+
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"></View>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ImageView imgkeluar;
     private Toolbar mtToolbar;
-    private LinearLayout pindahToChat;
+    private LinearLayout pindahToChat,pindahToBerobat;
     private DatabaseReference mUserRef;
 
     @Override
@@ -51,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, ChatActivity2.class);
                 //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+            }
+        });
+        pindahToBerobat = findViewById(R.id.DaftarBerobat);
+        pindahToBerobat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ListDaftarBerobat.class);
+                startActivity(intent);
             }
         });
 
