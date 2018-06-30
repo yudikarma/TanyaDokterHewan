@@ -165,6 +165,7 @@
 
                 >
                 <LinearLayout
+                    android:id="@+id/rekammedis"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -183,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="Baca Artikel"/>
+                        android:text="Rekam Medis"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -222,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-                        android:text="Acount Settings"/>
+                        android:text="Baca Artikel"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -269,7 +270,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Tentang"/>
+                        android:text="Acount Settings"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -309,7 +310,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Keluar"/>
+                        android:text="Tentang"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

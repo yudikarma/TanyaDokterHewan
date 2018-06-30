@@ -101,6 +101,9 @@ public class DaftarBerobat extends AppCompatActivity {
                     mprProgressDialog.setMessage("add record data..");
                     mprProgressDialog.setCanceledOnTouchOutside(false);
                     mprProgressDialog.show();
+                    DatabaseReference newNotificationRef = mRootDatabaseReference.child("Hewan").child(uid).push();
+                    String idHewan = newNotificationRef.getKey();
+
 
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("nama_hewan", snamehewan);
@@ -114,11 +117,11 @@ public class DaftarBerobat extends AppCompatActivity {
 
                     Map pussMap = new HashMap();
 
-                    Map Hapushewan = new HashMap();
-                    Hapushewan.put("Hewan/"+uid+"/"+snamehewan,userMap );
+                    Map tambahhewan = new HashMap();
+                    tambahhewan.put("Hewan/"+uid+"/"+idHewan,userMap );
 
 
-                    mRootDatabaseReference.updateChildren(Hapushewan, new DatabaseReference.CompletionListener() {
+                    mRootDatabaseReference.updateChildren(tambahhewan, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                                     if (databaseError == null){

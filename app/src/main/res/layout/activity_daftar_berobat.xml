@@ -19,7 +19,7 @@
             android:id="@+id/collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/background_appbar"
+            android:background="@drawable/matterial_background"
             app:collapsedTitleGravity="start"
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleMarginBottom="10dp"

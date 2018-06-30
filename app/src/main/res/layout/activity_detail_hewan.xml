@@ -89,6 +89,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingTop="20dp"
     android:paddingBottom="2dp">
 
     <TextView
@@ -97,6 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:padding="2dp"
+
 
         android:text="Nama Hewan    :"
         android:textColor="#8c8c8c"
@@ -307,10 +309,11 @@
                         style="?android:textAppearanceSmall"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="18dp"
                         android:background="@color/green"
                         android:text="Kembali"
                         android:textColor="@color/colorWhite"
+
 
                         android:textStyle="bold" />
 

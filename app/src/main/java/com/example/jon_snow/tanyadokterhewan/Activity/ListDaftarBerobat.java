@@ -122,7 +122,7 @@ public class ListDaftarBerobat extends AppCompatActivity {
                                         if (i == 0){
 
                                             //DAFTAR BEROBAT LANJUT
-                                            Intent profilIntent = new Intent(ListDaftarBerobat.this,ProfilActivity.class);
+                                            Intent profilIntent = new Intent(ListDaftarBerobat.this,DaftarKeDokter.class);
                                             // i.putExtra("user_id",list_user_id);
                                             profilIntent.putExtra("namahewan",listNamaHewan );
                                             startActivity(profilIntent);

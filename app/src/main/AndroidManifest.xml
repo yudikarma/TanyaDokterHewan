@@ -62,7 +62,9 @@
         <activity
             android:name=".Activity.DaftarBerobat"
             android:parentActivityName=".Activity.MainActivity" />
-        <activity android:name=".Activity.DetailHewan"></activity>
+        <activity android:name=".Activity.DetailHewan" />
+        <activity android:name=".Activity.DaftarKeDokter" />
+        <activity android:name=".Activity.ListRekamMedis"></activity>
     </application>
 
 </manifest>
