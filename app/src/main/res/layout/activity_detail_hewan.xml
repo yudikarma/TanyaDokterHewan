@@ -31,7 +31,7 @@
             >
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarid"
+                android:id="@+id/toolbardetailhewan"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
@@ -203,6 +203,35 @@
                             android:padding="2dp"
                             android:paddingStart="15dp"
                             android:text="Angora"
+                            android:textColor="#8c8c8c"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="2dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:padding="2dp"
+
+                            android:text="   Warna Bulu    :"
+                            android:textColor="#8c8c8c"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/dwarnabulu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="2dp"
+                            android:paddingStart="15dp"
+                            android:text="Coklat"
                             android:textColor="#8c8c8c"
                             android:textSize="18sp"
                             android:textStyle="bold" />

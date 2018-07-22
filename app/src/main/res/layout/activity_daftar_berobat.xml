@@ -25,13 +25,13 @@
             app:expandedTitleMarginBottom="10dp"
             app:expandedTitleMarginStart="10dp"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:title="Daftar Berobat"
+            app:title="Biodata Hewan"
 
 
             >
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarid"
+                android:id="@+id/toolbardaftarberobat"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
@@ -138,6 +138,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="RAS (Ex: Angora)"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorHint="@color/colorPrimaryDark"
+                            android:textColorLink="@color/colorPrimaryDark" />
+
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/ewarnabulu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Warna Bulu (Ex: coklat)"
                             android:inputType="text"
                             android:maxLines="1"
                             android:singleLine="true"

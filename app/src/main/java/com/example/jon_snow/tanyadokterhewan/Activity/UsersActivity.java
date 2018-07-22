@@ -65,8 +65,22 @@ public class UsersActivity extends AppCompatActivity{
 
         mToolbar = (Toolbar) findViewById(R.id.user_appbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Dokter List");
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("Dokter List");
+        getSupportActionBar().setTitle("List Dokter");
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(UsersActivity.this,MainActivity.class);
+
+                startActivity(intent);
+
+                finish();
+            }
+        });
         statusOnline = (ImageView) findViewById(R.id.user_single_online_icon);
 
         mListView = (RecyclerView) findViewById(R.id.user_list);

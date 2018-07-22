@@ -14,6 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:weightSum="1">
         <android.support.design.widget.CollapsingToolbarLayout
+
             android:id="@+id/collapsing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +22,9 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             app:contentScrim="@color/colorPrimary"
             android:background="@drawable/colapsing_bacground"
-            app:title="Dokter FKH"
+            app:title="Veterinary"
+
+
 
 
             >
@@ -80,14 +83,14 @@
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/message_126"
+                        android:src="@drawable/doctor7"
                         android:layout_marginTop="2dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Konsultasi"
+                        android:text="Chat Dokter"
                         android:textStyle="bold" />
 
                     <View
@@ -116,21 +119,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:id="@+id/DaftarBerobat"
+                    android:id="@+id/pindahToListDokter"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-
-                        android:background="@drawable/circlebackgroundgreen"
-                        android:src="@drawable/hospital_126" />
+                        android:src="@drawable/doktor"
+                        android:background="@drawable/circlebackgroundpurple"
+                        />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Daftar Berobat"
+                        android:text="List Dokter"
                         android:textStyle="bold" />
 
                     <View
@@ -144,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Silahkan Klik untuk daftar berobat pada klinik FKH."
+                        android:text="Silahkan Klik untuk Melihat List Dokter Hewan FKH."
                         android:textColor="@color/birutua" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -165,7 +168,7 @@
 
                 >
                 <LinearLayout
-                    android:id="@+id/rekammedis"
+                    android:id="@+id/DaftarBerobat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -177,7 +180,47 @@
                         android:layout_height="64dp"
 
                         android:background="@drawable/circlebackgroundgreen"
-                        android:src="@drawable/rekammedis_126"/>
+                        android:src="@drawable/nurse1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Daftar Berobat"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorWhite"
+                        android:layout_margin="1dp"></View>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Klik untuk Melakukan Pendaftaran Berobat pada Klinik FKH "
+                        android:padding="5dp"
+                        android:textColor="@color/birutua"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="5dp"
+                android:background="@color/colorWhitemuda">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/rekammedis"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+
+                        android:background="@drawable/circlebackgroundgreen"
+
+                        android:src="@drawable/medicalhistory8"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -194,47 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="membaca artikel tentang menjaga kesehatan hewan."
-                        android:padding="5dp"
-                        android:textColor="@color/birutua"/>
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:layout_width="160dp"
-                android:layout_height="190dp"
-                android:layout_margin="5dp"
-                android:background="@color/colorWhitemuda">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-
-                        android:background="@drawable/circlebackgroundgreen"
-
-                        android:src="@drawable/ic_store_mall_directory_black_24dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_marginTop="10dp"
-                        android:text="Baca Artikel"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorWhite"
-                        android:layout_margin="1dp"></View>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Silahkan melakukan konsultasi untuk
-mengenal jenis penyakit."
+                        android:text="Silahkan Klik Untuk Melihat Informasi Riwayat penyakit  ."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>
@@ -258,19 +261,20 @@ mengenal jenis penyakit."
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:id="@+id/panduan">
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/message_126"/>
+                        android:src="@drawable/cardiogram1"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Acount Settings"/>
+                        android:text="Panduan Aplikasi "/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -280,7 +284,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Informasi tentang Cara penggunaan Aplikasi dan Informasi Developer."
+                        android:text="Panduan  tata cara penggunaan apikasi Tanya Dokter hewan."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>
@@ -294,14 +298,15 @@ mengenal jenis penyakit."
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:id="@+id/tentang">
 
                     <ImageView
                         android:layout_width="64dp"
                         android:layout_height="64dp"
 
                         android:background="@drawable/circlebackgroundgreen"
-                        android:src="@drawable/hospital_126"
+                        android:src="@drawable/surgeon11"
                         android:id="@+id/keluar"
                         />
 
@@ -310,7 +315,7 @@ mengenal jenis penyakit."
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_marginTop="5dp"
-                        android:text="Tentang"/>
+                        android:text="Tentang Pengembang"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -320,7 +325,7 @@ mengenal jenis penyakit."
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Keluar dari aplikasi dan user login."
+                        android:text="Informasi dan Data Diri tentang Pengembang."
                         android:padding="5dp"
                         android:textColor="@color/birutua"/>
                 </LinearLayout>

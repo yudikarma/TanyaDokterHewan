@@ -57,12 +57,20 @@ public class ListDaftarBerobat extends AppCompatActivity {
         *//*  userDatabase = FirebaseDatabase.getInstance().getReference().child("users");*//*
 
         mDatabaseReference.keepSynced(true);*/
-        muser = FirebaseAuth.getInstance().getUid();
+        muser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        mToolbar = (Toolbar) findViewById(R.id.user_appbar);
+        mToolbar = (Toolbar) findViewById(R.id.tolbarlistdaftarberobat);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("List Hewan Peliharaan");
+        getSupportActionBar().setTitle("List Hewan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gotomain = new Intent(ListDaftarBerobat.this,MainActivity.class);
+                gotomain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(gotomain);
+            }
+        });
 
 
         mListView = (RecyclerView) findViewById(R.id.listhewan);
@@ -106,12 +114,12 @@ public class ListDaftarBerobat extends AppCompatActivity {
                         Log.i("namaaaaaaaa", nama);
                         holder.setNamehewan(nama);
                         holder.setJenishewan(jenis);
-                        holder.setRashewan(Ras);
+                      /*  holder.setRashewan(Ras);*/
 
                         holder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                CharSequence options[] = new CharSequence[]{"Daftar Berobat","Lihat Detail","Hapus"};
+                                CharSequence options[] = new CharSequence[]{"Daftar Berobat","Lihat Detail"};
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ListDaftarBerobat.this);
 
                                 builder.setTitle("Select Options");
@@ -136,9 +144,9 @@ public class ListDaftarBerobat extends AppCompatActivity {
                                             startActivity(profilIntent);
 
                                         }
-                                        if (i == 2){
+                                        /*if (i == 2){
                                             //HAPUS RECORD
-                                        }
+                                        }*/
                                     }
                                 });
                                 builder.show();
@@ -196,14 +204,14 @@ public class ListDaftarBerobat extends AppCompatActivity {
 
     public class ListDaftarHolder extends RecyclerView.ViewHolder {
         View mView;
-        TextView namehewan,jenishewan,rashewan ;
+        TextView namehewan,jenishewan ;
         public ListDaftarHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
             namehewan = mView.findViewById(R.id.namaHewan);
             jenishewan = mView.findViewById(R.id.jenis_hewan);
-            rashewan = mView.findViewById(R.id.rashewan);
+
         }
 
         public void setNamehewan (String namahewan1){
@@ -214,9 +222,7 @@ public class ListDaftarBerobat extends AppCompatActivity {
         public void setJenishewan(String jenishewan1){
             jenishewan.setText(jenishewan1);
         }
-        public void setRashewan(String rashewan1){
-            rashewan.setText(rashewan1);
-        }
+
 
     }
 }

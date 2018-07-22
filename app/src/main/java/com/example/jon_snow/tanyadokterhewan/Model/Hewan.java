@@ -12,6 +12,15 @@ public class Hewan {
     private String umur;
     private String alamat;
     private String jenis_lk;
+    private String warnabulu;
+
+    public String getWarnabulu() {
+        return warnabulu;
+    }
+
+    public void setWarnabulu(String warnabulu) {
+        this.warnabulu = warnabulu;
+    }
 
     public Hewan(){
 

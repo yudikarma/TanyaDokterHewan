@@ -31,7 +31,7 @@
             >
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarid"
+                android:id="@+id/toolbardaftarkedokter"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
@@ -114,7 +114,8 @@
                             android:id="@+id/nohppemililk"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="No Telp / HP" />
+                            android:hint="No Telp / HP"
+                            android:inputType="number"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -137,7 +138,7 @@
                             android:id="@+id/gejala"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Gejala (Ex: Mata berair,bulu rontok,dll)" />
+                            android:hint="Keluhan (Ex: Mata berair,bulu rontok,dll)" />
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -146,9 +147,10 @@
 
                         <android.support.design.widget.TextInputEditText
                             android:id="@+id/dugaan"
+                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Dugaan  sementara (ex : Scabies,Flu )" />
+                            android:hint="Diagnosa dokter (ex : Scabies,Flu )" />
                     </android.support.design.widget.TextInputLayout>
 
                     <View

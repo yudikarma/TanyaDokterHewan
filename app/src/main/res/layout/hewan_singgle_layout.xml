@@ -4,39 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profil_single_layout"
         android:layout_width="64dp"
         android:layout_height="64dp"
+
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/cat" />
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/dog"
+        app:civ_border_color="@color/birumuda"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/namaHewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+
         android:layout_alignParentTop="true"
-        android:layout_marginStart="71dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="17dp"
         android:text="Nama Hewan"
-        android:textSize="24sp" />
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/jenis_hewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/namaHewan"
         android:layout_below="@+id/namaHewan"
-        android:layout_marginStart="78dp"
         android:text="Jenis Hewan" />
 
-    <TextView
-        android:id="@+id/rashewan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignStart="@+id/jenis_hewan"
-        android:layout_below="@+id/jenis_hewan"
-        android:text="Ras" />
 </RelativeLayout>

@@ -57,12 +57,20 @@ public class ChatActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_app_bar2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tolbarchat);
         //setSupportActionBar(toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Chat Dokter");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gotomain = new Intent(ChatActivity2.this,MainActivity.class);
+                gotomain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(gotomain);
+            }
+        });
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -119,12 +127,12 @@ public class ChatActivity2 extends AppCompatActivity {
             Intent i = new Intent(ChatActivity2.this, SettingActivity.class);
             /*i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
             startActivity(i);
-        } else if (item.getItemId() == R.id.All_user) {
+        } /*else if (item.getItemId() == R.id.All_user) {
             Intent i = new Intent(ChatActivity2.this, UsersActivity.class);
            // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
 
-        }
+        }*/
         return true;
     }
 

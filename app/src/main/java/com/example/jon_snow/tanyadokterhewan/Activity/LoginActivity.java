@@ -6,21 +6,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jon_snow.tanyadokterhewan.Model.Users;
 import com.example.jon_snow.tanyadokterhewan.R;
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
@@ -48,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private TextView regiSt;
+    private LinearLayout regiSt;
     private Button mEmailSignInButton;
     private ProgressDialog mpProgressDialog;
     private static String ROLE = "users";
@@ -57,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     //firebase user database
     private DatabaseReference muserDatabaseReference;
+    private DatabaseReference musercampurDatabase;
 
 
     @Override
@@ -68,25 +76,58 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordView = (EditText) findViewById(R.id.password);
 
 
-        regiSt = (TextView) findViewById(R.id.tvRegister);
+        regiSt =  findViewById(R.id.tvRegister);
         mpProgressDialog = new ProgressDialog(this);
 
 
         //firebase
         muserDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien");
+        musercampurDatabase = FirebaseDatabase.getInstance().getReference().child("UserCampur");
+
         mAuth = FirebaseAuth.getInstance();
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailView.getText().toString();
-                String password = mPasswordView.getText().toString();
+                final String email = mEmailView.getText().toString();
+                final String password = mPasswordView.getText().toString();
                 if (!TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
                     mpProgressDialog.setTitle("login..");
                     mpProgressDialog.setMessage("we are try connect your acount..");
                     mpProgressDialog.setCanceledOnTouchOutside(false);
                     mpProgressDialog.show();
-                    loginUser(email,password);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child("Pasien").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                                    Users users = dataSnapshot1.getValue(Users.class);
+                                    final String emailuser = users.getEmail();
+                                    if (emailuser != null && emailuser.equalsIgnoreCase(email)){
+                                        loginUser(email,password);
+
+                                    }else {
+                                        mpProgressDialog.hide();
+                                        Toast.makeText(LoginActivity.this, "please wait ..", Toast.LENGTH_SHORT).show();
+                                        Log.i("EMAIL USERS", ""+emailuser);
+                                    }
+                                }
+                                mpProgressDialog.hide();
+                                Toast.makeText(LoginActivity.this, "Email Password Not Found", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                mpProgressDialog.hide();
+                                Toast.makeText(LoginActivity.this, "Child Not Exiest", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }else {
                      mpProgressDialog.hide();
                    Toast.makeText(LoginActivity.this,"please insert your email and password login",Toast.LENGTH_SHORT).show();
@@ -100,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(i);
-                finish();
+
             }
         });
 
@@ -114,8 +155,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
            if (task.isSuccessful()){
 
-               String device_token = FirebaseInstanceId.getInstance().getToken();
-               String current_user_id = mAuth.getCurrentUser().getUid();
+               final String device_token = FirebaseInstanceId.getInstance().getToken();
+               final String current_user_id = mAuth.getCurrentUser().getUid();
 
                muserDatabaseReference.child(current_user_id).child("device_token").setValue(device_token).addOnSuccessListener(new OnSuccessListener<Void>() {
                    @Override
@@ -126,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                        intent.putExtra("role", ROLE);
                        startActivity(intent);
-                        finish();
+                       finish();
                    }
                });
 

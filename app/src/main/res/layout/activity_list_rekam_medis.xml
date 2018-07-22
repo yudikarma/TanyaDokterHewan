@@ -7,7 +7,7 @@
     tools:context=".Activity.ListDaftarBerobat">
 
     <include
-        android:id="@+id/user_appbar"
+        android:id="@+id/tolbarlistrekammedis"
         layout="@layout/app_bar_layout" />
 
     <android.support.v7.widget.RecyclerView
@@ -18,14 +18,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/add_hewan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="33dp"
-        android:layout_marginEnd="26dp"
-        android:background="@color/colorAccent"
-        android:src="@drawable/ic_border_color_black_24dp" />
+
 </RelativeLayout>

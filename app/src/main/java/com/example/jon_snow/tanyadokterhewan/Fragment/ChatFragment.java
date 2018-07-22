@@ -1,7 +1,9 @@
 package com.example.jon_snow.tanyadokterhewan.Fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.example.jon_snow.tanyadokterhewan.Activity.ProfilActivity;
 import com.example.jon_snow.tanyadokterhewan.Activity.Tampung_chatActivity;
 import com.example.jon_snow.tanyadokterhewan.Model.Conv;
 import com.example.jon_snow.tanyadokterhewan.R;
@@ -100,6 +103,18 @@ public class ChatFragment extends Fragment {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         String data = dataSnapshot.child("message").getValue().toString();
+                        /*holder.setMessage(data, model.isSeen());*/
+                       /* String http = data.substring(0, 4);*/
+                        if (!data.isEmpty() && data != null && data.length() >= 10) {
+                            String http = data.substring(0, 4);
+                            if (http.equalsIgnoreCase("http")){
+                                holder.setMessage("Image", model.isSeen());
+                            } else{
+                                holder.setMessage(data, model.isSeen());
+                            }
+
+
+                        }
                         holder.setMessage(data, model.isSeen());
                     }
 
@@ -147,6 +162,29 @@ public class ChatFragment extends Fragment {
                                 chatIntent.putExtra("user_id", list_user_id);
                                 chatIntent.putExtra("user_name", userName);
                                 startActivity(chatIntent);
+                            }
+                        });
+                        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+                                CharSequence options[] = new CharSequence[]{"Delete Message"};
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                                builder.setTitle("Choose Options");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        //click event for each item
+                                        if (i == 0){
+                                           mMessageDatabase.child(list_user_id).setValue(null);
+                                           mConvDatabase.child(mCurrent_user_id).child(list_user_id).setValue(null);
+                                        }
+
+                                    }
+                                });
+                                builder.show();
+                                return true;
                             }
                         });
                     }

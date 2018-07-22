@@ -1,6 +1,7 @@
 package com.example.jon_snow.tanyadokterhewan.Activity;
 
 import android.content.Intent;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,8 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ImageView imgkeluar;
     private Toolbar mtToolbar;
-    private LinearLayout pindahToChat,pindahToBerobat;
+    private LinearLayout pindahToChat,pindahToBerobat,pindahToRekamMedis,pindahToListDokter,pindahToPanduan,pindahToTentang;
     private DatabaseReference mUserRef;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private String background = "default";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
         pindahToChat = (LinearLayout) findViewById(R.id.layout_chat);
         pindahToChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +63,64 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ListDaftarBerobat.class);
                 startActivity(intent);
+            }
+        });
+        pindahToRekamMedis = findViewById(R.id.rekammedis);
+        pindahToRekamMedis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ListRekamMedis.class);
+                startActivity(intent);
+            }
+        });
+
+        pindahToListDokter = findViewById(R.id.pindahToListDokter);
+        pindahToListDokter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, UsersActivity.class);
+                // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+        });
+
+        collapsingToolbarLayout = findViewById(R.id.collapsing);
+        collapsingToolbarLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (background.equals("default")){
+                    collapsingToolbarLayout.setBackgroundResource(R.drawable.matterial_background);
+                    background = "matterial";
+                }
+                else if (background.equals("matterial")){
+                    collapsingToolbarLayout.setBackgroundResource(R.drawable.colapsing_bacground);
+                    background = "default";
+
+                }else{
+                    collapsingToolbarLayout.setBackgroundResource(R.drawable.colapsing_bacground);
+
+                }
+
+            }
+        });
+
+        pindahToPanduan = findViewById(R.id.panduan);
+        pindahToPanduan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Panduan.class);
+                startActivity(intent);
+
+            }
+        });
+
+        pindahToTentang = findViewById(R.id.tentang);
+        pindahToTentang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Tentang.class);
+                startActivity(intent);
+
             }
         });
 
@@ -136,12 +198,12 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, SettingActivity.class);
             /*i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
             startActivity(i);
-        } else if (item.getItemId() == R.id.All_user) {
+        } /*else if (item.getItemId() == R.id.All_user) {
             Intent i = new Intent(MainActivity.this, UsersActivity.class);
            // i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(i);
 
-        }
+        }*/
         return true;
     }
 }

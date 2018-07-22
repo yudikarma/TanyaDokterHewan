@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -33,12 +35,25 @@ public class DaftarKeDokter extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String uid;
     ProgressDialog mprProgressDialog;
+    private Toolbar mToolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_ke_dokter);
+        mToolbar = (Toolbar) findViewById(R.id.toolbardaftarkedokter);
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gotomain = new Intent(DaftarKeDokter.this,MainActivity.class);
+                gotomain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(gotomain);
+            }
+        });
 
         mprProgressDialog = new ProgressDialog(this);
 
@@ -66,7 +81,7 @@ public class DaftarKeDokter extends AppCompatActivity {
 
                 if (!TextUtils.isEmpty(snamapemilik) && !TextUtils.isEmpty(salamt)
                         && !TextUtils.isEmpty(snamadokter) && !TextUtils.isEmpty(snohp)
-                        && !TextUtils.isEmpty(sgejala) && !TextUtils.isEmpty(sdugaan)
+                        && !TextUtils.isEmpty(sgejala)
                         ) {
 
                     mprProgressDialog.setTitle("wait a second");
@@ -78,36 +93,44 @@ public class DaftarKeDokter extends AppCompatActivity {
                     String idRekam = newNotificationRef.getKey();
 
                     HashMap<String, String> userMap = new HashMap<>();
-                    userMap.put("namaPemilik", snamapemilik);
-                    userMap.put("alamatpemilik", salamt);
-                    userMap.put("nohp", snohp);
-                    userMap.put("namadokter", snamadokter);
+                    userMap.put("nama_pemilik", snamapemilik);
+                    userMap.put("alamat_pemilik", salamt);
+                    userMap.put("no_hp", snohp);
+                    userMap.put("nama_dokter", snamadokter);
+                    userMap.put("terapi", "default");
+                    userMap.put("penyakit_di_derita", "default");
 
                     userMap.put("gejala", sgejala);
-                    userMap.put("dugaan", sdugaan);
+                    userMap.put("dugaan", "default");
                     Date c = Calendar.getInstance().getTime();
                    // System.out.println("Current time => " + c);
+                    //Ambil tanggal rekam
+                    /*SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+                    String formattedDate = df.format(c);*/
 
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-                    String formattedDate = df.format(c);
-                    stanggal = formattedDate;
+                    final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
+                    stanggal = currentDate;
                     userMap.put("tanggal_rekam",stanggal );
                     sidhewan  = getIntent().getStringExtra("namahewan");
                     userMap.put("idhewan", sidhewan);
 
+                    userMap.put("tanggal_periksa", "default");
 
 
-                    Map pussMap = new HashMap();
+
+
 
                     Map simpanrekam = new HashMap();
-                    simpanrekam.put("RekamMedis/"+uid+"/"+sidhewan,userMap );
+                    simpanrekam.put("RekamMedis/"+uid+"/"+idRekam,userMap );
 
                     mRootDatabaseReference.updateChildren(simpanrekam, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if (databaseError == null){
                                 mprProgressDialog.dismiss();
-                                Toast.makeText(DaftarKeDokter.this, "Berhasil Menyimpan", Toast.LENGTH_LONG).show();
+                                Toast.makeText(DaftarKeDokter.this, "Anda telah berhasil mendaftar berobat pada klinik FKH Unsyah", Toast.LENGTH_LONG).show();
+                                Toast.makeText(DaftarKeDokter.this, "Silahkan mengunjungin Klinik FKH unsyah untuk Proses Pemeriksaan selanjutnya.", Toast.LENGTH_LONG).show();
+
                                 Intent intent = new Intent(DaftarKeDokter.this,MainActivity.class);
                                 startActivity(intent);
                                 finish();

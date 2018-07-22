@@ -56,6 +56,15 @@ public class RegisterActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.regist_app_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Registrasi");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
         //Reference
 
@@ -92,8 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
 
-                if(!TextUtils.isEmpty(edisplayname)||TextUtils.isEmpty(eemail)||TextUtils.isEmpty(epassword)
-                        || TextUtils.isEmpty(eno_hp)|| TextUtils.isEmpty(ealamat)||TextUtils.isEmpty(jenislk)) {
+                if(!TextUtils.isEmpty(edisplayname)&& !TextUtils.isEmpty(eemail)&& !TextUtils.isEmpty(epassword)
+                        && !TextUtils.isEmpty(eno_hp)&& !TextUtils.isEmpty(ealamat)&& !TextUtils.isEmpty(jenislk)) {
                     mpProgressDialog.setTitle("Creating new acount..");
                     mpProgressDialog.setMessage("Please wait.. while we create your acount..");
                     mpProgressDialog.setCanceledOnTouchOutside(false);
@@ -101,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                     register_user(edisplayname, eemail, epassword,eno_hp,ealamat,jenislk);
                 }else{
                     mpProgressDialog.hide();
-                    Toast.makeText(RegisterActivity.this,"Field Tidak Boleh Kosong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"Harap isi seluruh form",Toast.LENGTH_SHORT).show();
                 }
 
             }

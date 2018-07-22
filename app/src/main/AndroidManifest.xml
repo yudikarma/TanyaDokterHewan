@@ -12,7 +12,7 @@
     <application
         android:name=".Activity.TanyaDokterHewanChat"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/fkh"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -64,7 +64,11 @@
             android:parentActivityName=".Activity.MainActivity" />
         <activity android:name=".Activity.DetailHewan" />
         <activity android:name=".Activity.DaftarKeDokter" />
-        <activity android:name=".Activity.ListRekamMedis"></activity>
+        <activity android:name=".Activity.ListRekamMedis" />
+        <activity android:name=".Activity.DetailRiwayatPenyakit" />
+        <activity android:name=".Activity.Tentang" />
+        <activity android:name=".Activity.Panduan" />
+        <activity android:name=".Activity.DetailUser"></activity>
     </application>
 
 </manifest>

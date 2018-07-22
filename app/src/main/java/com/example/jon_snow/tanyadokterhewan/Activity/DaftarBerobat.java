@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DaftarBerobat extends AppCompatActivity {
-    EditText namaHewan, jenisHewan, ras, ttl, umur, alamat;
+    EditText namaHewan, jenisHewan, ras, ttl, umur, alamat,warnabulu;
     RadioGroup jenis_lk;
     RadioButton jantan, betina;
     Button daftar;
@@ -38,12 +39,25 @@ public class DaftarBerobat extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String uid;
     ProgressDialog mprProgressDialog;
+    private Toolbar mToolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_berobat);
+        mToolbar = (Toolbar) findViewById(R.id.toolbardaftarberobat);
+        setSupportActionBar(mToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gotomain = new Intent(DaftarBerobat.this,MainActivity.class);
+                gotomain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(gotomain);
+            }
+        });
 
         mprProgressDialog = new ProgressDialog(this);
 
@@ -58,6 +72,7 @@ public class DaftarBerobat extends AppCompatActivity {
         jantan = findViewById(R.id.rjantan);
         betina = findViewById(R.id.rbetina);
         daftar = findViewById(R.id.eDaftarBerobat);
+        warnabulu = findViewById(R.id.ewarnabulu);
 
         mAuth = FirebaseAuth.getInstance();
         uid = mAuth.getCurrentUser().getUid();
@@ -74,6 +89,7 @@ public class DaftarBerobat extends AppCompatActivity {
                 final String sttl = ttl.getText().toString();
                 final String sumur = umur.getText().toString();
                 final String salamat = alamat.getText().toString();
+                final String swrnabulu = warnabulu.getText().toString();
 
                 //for radio choice
                 String jenislk2 = "";
@@ -110,6 +126,7 @@ public class DaftarBerobat extends AppCompatActivity {
                     userMap.put("jenis_hewan", sjenishewan);
                     userMap.put("ras", sras);
                     userMap.put("ttl", sttl);
+                    userMap.put("warna_bulu", swrnabulu);
 
                     userMap.put("umur", sumur);
                     userMap.put("alamat", salamat);
