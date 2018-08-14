@@ -35,9 +35,9 @@ public class DetailHewan extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent gotomain = new Intent(DetailHewan.this,MainActivity.class);
+               /* Intent gotomain = new Intent(DetailHewan.this,MainActivity.class);
                 gotomain.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(gotomain);
+                startActivity(gotomain);*/
                 finish();
             }
         });

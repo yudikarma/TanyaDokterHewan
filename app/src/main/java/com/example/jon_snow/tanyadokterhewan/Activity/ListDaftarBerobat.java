@@ -46,6 +46,7 @@ public class ListDaftarBerobat extends AppCompatActivity {
     private Users users1;
     private String muser;
     private Query query;
+    private TextView notifnul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class ListDaftarBerobat extends AppCompatActivity {
                 startActivity(gotomain);
             }
         });
+        notifnul = findViewById(R.id.notifnulllisthewan);
 
 
         mListView = (RecyclerView) findViewById(R.id.listhewan);
@@ -178,7 +180,24 @@ public class ListDaftarBerobat extends AppCompatActivity {
             }
         });
 
-        mListView.setAdapter(adapter);
+        FirebaseDatabase.getInstance().getReference().child("Hewan").child(muser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long jumlah = dataSnapshot.getChildrenCount();
+                if (jumlah>0){
+                    mListView.setAdapter(adapter);
+                }else {
+                    notifnul.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
     @Override
     protected void onStart() {

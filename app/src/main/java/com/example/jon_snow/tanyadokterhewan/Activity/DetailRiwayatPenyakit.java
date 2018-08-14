@@ -36,9 +36,9 @@ public class DetailRiwayatPenyakit extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent(DetailRiwayatPenyakit.this,ListRekamMedis.class);
+             /*   Intent intent  = new Intent(DetailRiwayatPenyakit.this,ListRekamMedis.class);
 
-                startActivity(intent);
+                startActivity(intent);*/
 
                 finish();
             }

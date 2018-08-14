@@ -51,6 +51,8 @@ public class UsersActivity extends AppCompatActivity{
     private String muser;
     private  Query query;
 
+    private TextView notifnull;
+
 
 
     @Override
@@ -66,6 +68,8 @@ public class UsersActivity extends AppCompatActivity{
         mToolbar = (Toolbar) findViewById(R.id.user_appbar);
         setSupportActionBar(mToolbar);
 
+        notifnull = findViewById(R.id.notifnulluser);
+
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,9 +78,9 @@ public class UsersActivity extends AppCompatActivity{
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  = new Intent(UsersActivity.this,MainActivity.class);
+             /*   Intent intent  = new Intent(UsersActivity.this,MainActivity.class);
 
-                startActivity(intent);
+                startActivity(intent);*/
 
                 finish();
             }
@@ -155,7 +159,23 @@ public class UsersActivity extends AppCompatActivity{
             }
 
         };
-        mListView.setAdapter(adapter);
+        FirebaseDatabase.getInstance().getReference().child("Users").child("Dokters").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long jumlah = dataSnapshot.getChildrenCount();
+                if (jumlah>0){
+                    mListView.setAdapter(adapter);
+                }else {
+                    notifnull.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
     }

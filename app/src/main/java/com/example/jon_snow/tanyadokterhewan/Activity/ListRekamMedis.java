@@ -42,6 +42,7 @@ public class ListRekamMedis extends AppCompatActivity {
     private Users users1;
     private String muser;
     private Query query;
+    private TextView notifnull;
 
 
     @Override
@@ -50,6 +51,8 @@ public class ListRekamMedis extends AppCompatActivity {
         setContentView(R.layout.activity_list_rekam_medis);
 
         muser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        notifnull = findViewById(R.id.notifnullrekammedis);
 
         mToolbar = (Toolbar) findViewById(R.id.tolbarlistrekammedis);
         setSupportActionBar(mToolbar);
@@ -121,7 +124,24 @@ public class ListRekamMedis extends AppCompatActivity {
                 return new ListDaftarHolder(mView);
             }
         };
-        mListView.setAdapter(adapter);
+
+        FirebaseDatabase.getInstance().getReference().child("RiwayatPenyakit").child(muser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                long jumlah = dataSnapshot.getChildrenCount();
+                if (jumlah>0){
+                    mListView.setAdapter(adapter);
+                }else {
+                    notifnull.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 

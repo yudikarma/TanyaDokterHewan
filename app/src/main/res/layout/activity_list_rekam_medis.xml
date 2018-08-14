@@ -9,6 +9,15 @@
     <include
         android:id="@+id/tolbarlistrekammedis"
         layout="@layout/app_bar_layout" />
+    <TextView
+        android:id="@+id/notifnullrekammedis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:text="Anda belum memiliki catatan rekam medis"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listrekammedis"

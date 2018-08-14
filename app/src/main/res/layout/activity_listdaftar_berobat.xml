@@ -9,7 +9,15 @@
     <include
         android:id="@+id/tolbarlistdaftarberobat"
         layout="@layout/app_bar_layout" />
-
+    <TextView
+        android:id="@+id/notifnulllisthewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:text="Anda Belum memasukkan Biodata Hewan"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listhewan"
         android:layout_width="match_parent"

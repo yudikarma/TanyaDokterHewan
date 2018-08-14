@@ -1,8 +1,18 @@
-<LinearLayout android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:id="@+id/notifnullchats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:visibility="gone"
 
+        android:text="anda Belum memiliki list Percakapan"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/conv_list"
         android:layout_width="match_parent"
@@ -11,4 +21,4 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</RelativeLayout>

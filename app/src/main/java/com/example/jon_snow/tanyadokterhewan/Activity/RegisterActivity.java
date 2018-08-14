@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout displayname;
     private TextInputLayout email;
     private TextInputLayout password;
+    private TextInputLayout password2;
     private TextInputLayout no_hp;
     private TextInputLayout alamat;
     private RadioGroup mRadioGroup;
@@ -47,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseReference;
     private DatabaseReference databaseUserCampur;
     private  FirebaseUser currentUser;
+
+    private String finalpassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity {
         displayname = (TextInputLayout) findViewById(R.id.reg_display_name);
         email = (TextInputLayout) findViewById(R.id.reg_email);
         password = (TextInputLayout) findViewById(R.id.reg_password);
+        password2 = findViewById(R.id.reg_password2);
         register = (Button) findViewById(R.id.regist_btn);
         no_hp = (TextInputLayout) findViewById(R.id.reg_no_hp);
         alamat = (TextInputLayout) findViewById(R.id.reg_alamat);
@@ -88,6 +92,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String edisplayname = displayname.getEditText().getText().toString();
                 String eemail = email.getEditText().getText().toString();
                 String epassword = password.getEditText().getText().toString();
+                String epassword2 = password2.getEditText().getText().toString();
+
                String eno_hp = no_hp.getEditText().getText().toString();
                 String ealamat = alamat.getEditText().getText().toString();
                 String jenislk = "";
@@ -103,11 +109,19 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(edisplayname)&& !TextUtils.isEmpty(eemail)&& !TextUtils.isEmpty(epassword)
                         && !TextUtils.isEmpty(eno_hp)&& !TextUtils.isEmpty(ealamat)&& !TextUtils.isEmpty(jenislk)) {
-                    mpProgressDialog.setTitle("Creating new acount..");
-                    mpProgressDialog.setMessage("Please wait.. while we create your acount..");
-                    mpProgressDialog.setCanceledOnTouchOutside(false);
-                    mpProgressDialog.show();
-                    register_user(edisplayname, eemail, epassword,eno_hp,ealamat,jenislk);
+
+                    if (epassword.equalsIgnoreCase(epassword2)){
+
+                        mpProgressDialog.setTitle("Creating new acount..");
+                        mpProgressDialog.setMessage("Please wait.. while we create your acount..");
+                        mpProgressDialog.setCanceledOnTouchOutside(false);
+                        mpProgressDialog.show();
+                        register_user(edisplayname, eemail,epassword ,eno_hp,ealamat,jenislk);
+                    }else {
+                        Toast.makeText(RegisterActivity.this, "Maaf Retype Password tidak sama", Toast.LENGTH_LONG).show();
+                    }
+
+
                 }else{
                     mpProgressDialog.hide();
                     Toast.makeText(RegisterActivity.this,"Harap isi seluruh form",Toast.LENGTH_SHORT).show();
@@ -163,13 +177,13 @@ public class RegisterActivity extends AppCompatActivity {
                                           finish();
                                       }else{
                                           mpProgressDialog.hide();
-                                          Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();
+                                          Toast.makeText(RegisterActivity.this,"Task is not succsesful",Toast.LENGTH_LONG).show();
                                       }
                                   }
                               });
                             } else {
                                 mpProgressDialog.hide();
-                                Toast.makeText(RegisterActivity.this,"Something Error!!, please check form and try again",Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this,"Proses penyimpanan ke databse gagal",Toast.LENGTH_LONG).show();
                             }
                         }
                     });
